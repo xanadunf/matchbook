@@ -1,10 +1,11 @@
-#' Login and Authenticate with the Matchbook.com API
-#' @name Login and Authentication
-#' @description Validate your session with the Matchbook API.
+#' Logout of the Matchbook.com API session
+#' @name Logout and Session termination
+#' @description End the Matchbook.com session.
 #' @param username Your Matchbook.com username. If you are not already registered got to: https://www.matchbook.com/
-#' @param password The password provided to you by email by the Matchbook.com team.
-#' @return A list with status_code, user_id and session_token values for your session.
-#' @seealso \code{\link{mb_logout}}
+#' @param user_id Your Matchbook.com user_id obtained from the mb_login call. 
+#' @param session_token Your Matchbook.com session_token obtained from the mb_login call. 
+#' @return The response insteger status_code.
+#' @seealso \code{\link{mb_login}}
 #' @export 
 #' @examples
 #' \dontrun{mb_login("my_username","verysafepassword")}
