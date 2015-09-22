@@ -8,29 +8,21 @@
 #' @seealso \code{\link{mb_login}}
 #' @export 
 #' @examples
-#' \dontrun{mb_login("my_username","verysafepassword")}
-
-mb_login <- function(username,password)
+#' \dontrun{mb_logout("my_username","my_user_id","my_private_session_token")}
+#' 
+mb_logout <- function(username,user_id,session_token)
 {
-  login_return <- NULL
-  if(nchar(username)==0|nchar(password)==0){
-    print("Invalid username or password format ...")
-    return(login_return)  
-  }else
+  status_code <- 0
+  body_data     <- paste("{'username': '",username,"', 'user-id': '",user_id,"', 'session-token' : '",session_token,"'}",sep="")
+  logout_resp    <- DELETE("https://www.matchbook.com/bpapi/rest/security/session", body=body_data,content_type_json(),accept_json())
+  status_code   <- logout_resp$status_code
+  if(status_code==200)
   {
-    session_token <-"";user_id<- 0
-    body_data     <- paste("{'username': '",username,"', 'password': '",password,"'}",sep="")
-    login_resp    <- POST("https://www.matchbook.com/bpapi/rest/security/session", body=body_data,content_type_json(),accept_json())
-    status_code   <- login_resp$status_code
-    if(status_code==200)
-    {
-      login_resp_content <- fromJSON(content(login_resp, "text", "application/json"))
-      session_token      <- login_resp_content$`session-token`
-      user_id            <- login_resp_content$`user-id`
-    }
-    login_return <- list(status_code=status_code,session_token=session_token,user_id=user_id)
-    return(login_return)    
+    print(paste("Matchbook session terminated OK.",sep=""))
+  } else
+  {
+    print(paste("Warning/Error in Matchbook session termination.",sep=""))
   }
+  return(status_code)
 }
-
 
