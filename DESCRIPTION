@@ -1,9 +1,12 @@
 Package: matchbook
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
+Title: Wrapper for the Matchbook.com API
+Version: 1.0.1
 Date: 2015-09-22
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Matchbook Analytics Team
+Maintainer: Matchbook Team <info@matchbook.com>
+Description: This provides a wrapper for the some basic functionality around the Matchbook.com REST API.
+Depends:
+    R (>= 3.0),
+    httr
+License: MIT
