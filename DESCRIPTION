@@ -3,8 +3,8 @@ Type: Package
 Title: Wrapper for the Matchbook.com API
 Version: 1.0.1
 Date: 2015-09-22
-Author: Matchbook Analytics Team
-Maintainer: Matchbook Team <info@matchbook.com>
+Author: Niall Fitzgerald
+Maintainer: Niall Fitzgerald <info@matchbook.com>
 Description: This provides a wrapper for the some basic functionality around the Matchbook.com REST API.
 Depends:
     R (>= 3.0),
