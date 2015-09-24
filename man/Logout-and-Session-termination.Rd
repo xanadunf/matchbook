@@ -5,14 +5,10 @@
 \alias{mb_logout}
 \title{Logout of the Matchbook.com API session}
 \usage{
-mb_logout(username, user_id, session_token)
+mb_logout(session_data)
 }
 \arguments{
-\item{username}{Your Matchbook.com username. If you are not already registered got to: https://www.matchbook.com/}
-
-\item{user_id}{Your Matchbook.com user_id obtained from the mb_login call.}
-
-\item{session_token}{Your Matchbook.com session_token obtained from the mb_login call.}
+\item{session_data}{This is a required paramter contianin security and preference information. Its an object that must take the exact format of an mb_login request.}
 }
 \value{
 The response insteger status_code.
@@ -21,7 +17,8 @@ The response insteger status_code.
 End the Matchbook.com session.
 }
 \examples{
-\dontrun{mb_logout("my_username","my_user_id","my_private_session_token")}
+\dontrun{my_session <- mb_login("my_user_name","verysafepassword");
+mb_logout(my_session)}
 }
 \seealso{
 \code{\link{mb_login}}

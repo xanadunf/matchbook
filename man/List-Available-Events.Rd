@@ -5,11 +5,12 @@
 \alias{mb_get_events}
 \title{Get List of Available Events}
 \usage{
-mb_get_events(start_date = Sys.Date(), end_date = Sys.Date() + 2,
-  sport_ids = c(15), market_states = c("open", "suspended"),
-  language = "en")
+mb_get_events(session_data, start_date = Sys.Date(), end_date = Sys.Date() +
+  2, sport_ids = c(15), market_states = c("open", "suspended"))
 }
 \arguments{
+\item{session_data}{An session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
+
 \item{start_date}{A string (or date/POSIXct) value with format YYYY-mm-dd or YYYY-mm-dd HH:MM:SS format. Defaults to events starting today .}
 
 \item{end_date}{A string (or date/POSIXct) value with format YYYY-mm-dd or YYYY-mm-dd HH:MM:SS format. Defaults to events starting before two days time.}
@@ -17,11 +18,9 @@ mb_get_events(start_date = Sys.Date(), end_date = Sys.Date() + 2,
 \item{sport_ids}{A vector of integer sport_ids that indicated sports for which event details are required. e.g. c(15,1) gives Soccer and Pro Football (NFL)}
 
 \item{market_states}{A vector of string containing the market states to return. Defaults to 'open' or 'suspended' market types.}
-
-\item{language}{A string with the language parameter e.g. 'en'}
 }
 \value{
-If successful, a dataframe with first 500 events and associated information. Only 500 events are permitted at one time. Pagination is possible but not implemented here.
+If successful, a dataframe with first 500 events and associated information. Only 500 events are permitted at one time. Pagination is possible but not implemented in this version.
 }
 \description{
 List the Events Available on Matchbook.com

@@ -5,13 +5,15 @@
 \alias{mb_get_markets}
 \title{Get List of Available Markets for a given Event}
 \usage{
-mb_get_markets(event_id, market_states = c("open", "suspended"),
+mb_get_markets(session_data, event_id, market_states = c("open", "suspended"),
   market_types = c("multirunner", "binary"),
   grading_types = c("asian-handicap", "high-score-wins", "low-score-wins",
   "point-spread", "point-total", "single-winner-wins"),
-  include_runners = FALSE, include_prices = FALSE, language = "en")
+  include_runners = FALSE, include_prices = FALSE)
 }
 \arguments{
+\item{session_data}{An session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
+
 \item{event_id}{The event_id integer for which a list of associated markets is required.}
 
 \item{market_states}{A vector of string containing the market states to return. Defaults to 'open' or 'suspended' market types.}
@@ -23,8 +25,6 @@ mb_get_markets(event_id, market_states = c("open", "suspended"),
 \item{include_runners}{A boolean parameter indicating if the runner names and id should be returned or not. Defaults to FALSE.}
 
 \item{include_prices}{A boolean parameter indicating if the runner prices should be returned or not. Defaults to FALSE.}
-
-\item{language}{A string with the language parameter e.g. 'en'}
 
 \item{sport_ids}{A vector of integer sport_ids that indicated sports for which event details are required. e.g. c(15,1) gives Soccer and Pro Football (NFL)}
 }

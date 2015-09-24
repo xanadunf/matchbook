@@ -1,31 +1,30 @@
 #' Get List of Available Events
 #' @name List Available Events
 #' @description List the Events Available on Matchbook.com
+#' @param session_data An session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
 #' @param start_date A string (or date/POSIXct) value with format YYYY-mm-dd or YYYY-mm-dd HH:MM:SS format. Defaults to events starting today .
 #' @param end_date A string (or date/POSIXct) value with format YYYY-mm-dd or YYYY-mm-dd HH:MM:SS format. Defaults to events starting before two days time.
 #' @param sport_ids A vector of integer sport_ids that indicated sports for which event details are required. e.g. c(15,1) gives Soccer and Pro Football (NFL)
 #' @param market_states A vector of string containing the market states to return. Defaults to 'open' or 'suspended' market types.
-#' @param language A string with the language parameter e.g. 'en'
-#' @return If successful, a dataframe with first 500 events and associated information. Only 500 events are permitted at one time. Pagination is possible but not implemented here.
+#' @return If successful, a dataframe with first 500 events and associated information. Only 500 events are permitted at one time. Pagination is possible but not implemented in this version.
 #' @seealso \code{\link{mb_get_sports}}
 #' @export 
 #' @examples
 #' \dontrun{mb_get_events(sport_ids=15)}
 #' 
 
-mb_get_events <- function(start_date=Sys.Date(),end_date=Sys.Date()+2,sport_ids=c(15),market_states = c("open","suspended"),language="en")
+mb_get_events <- function(session_data,start_date=Sys.Date(),end_date=Sys.Date()+2,sport_ids=c(15),market_states = c("open","suspended"))
 {
   valid_market_states<- c("suspended","open")
-  valid_languages    <- c("en","de","es","fr","hi","id","ja","ru","th","zh","zh_HANS","zh_HANT")
   content            <- NULL
+  if(is.null(session_data)){
+    print(paste("You have not provided data about your session in the session_data parameter. Please execute mb_login() and save the resulting object in a variable e.g. my_session <- mb_login(username,pwd); and pass session_data=my_session as a parameter in this function."));return(content)
+  }
   if(sum(sport_ids%%1)>0){
     print(paste("All sport_ids values must be integers. Please amend and try again."));return(content)
   }
   if(sum(!is.element(market_states,valid_market_states))>0){
     print(paste("All market_states values must be one of",paste(valid_market_states,collapse=","),". Please amend and try again."));return(content)
-  }
-  if(!is.element(language,valid_languages)){
-    print(paste("The language parameter must be one of",paste(valid_languages,collapse=","),". Please amend and try again."));return(content)
   }
   start_date_conv    <- try(as.POSIXct(start_date),silent=TRUE)
   end_date_conv    <- try(as.POSIXct(end_date),silent=TRUE)
@@ -36,8 +35,8 @@ mb_get_events <- function(start_date=Sys.Date(),end_date=Sys.Date()+2,sport_ids=
     start_date_epoch   <- as.numeric(start_date_conv)
     end_date_epoch     <- as.numeric(end_date_conv)
   }
-  param_list         <- list(after=start_date_epoch,before=end_date_epoch,'sport-ids'=paste(sport_ids,collapse=","),'market-states'=paste(market_states,collapse=","),'per-page'='500',language=language)
-  get_events_resp    <- GET("https://www.matchbook.com/bpapi/rest/events",query=param_list,content_type_json(),accept_json())  
+  param_list         <- list('exchange-type'='back-lay',after=start_date_epoch,before=end_date_epoch,'sport-ids'=paste(sport_ids,collapse=","),'market-states'=paste(market_states,collapse=","),'per-page'='500')
+  get_events_resp    <- GET("https://www.matchbook.com/bpapi/rest/events",query=param_list,content_type_json(),accept_json(),set_cookies('session-token'=session_data$session_token),add_headers('User-Agent'='rlibnf')  )
   status_code        <- get_events_resp$status_code  
   if(status_code==200)
   {
@@ -49,4 +48,3 @@ mb_get_events <- function(start_date=Sys.Date(),end_date=Sys.Date()+2,sport_ids=
   return(content)
 }
 
-mb_get_events()

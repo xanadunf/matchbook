@@ -19,15 +19,19 @@ mb_login <- function(username,password)
   {
     session_token <-"";user_id<- 0
     body_data     <- paste("{'username': '",username,"', 'password': '",password,"'}",sep="")
-    login_resp    <- POST("https://www.matchbook.com/bpapi/rest/security/session", body=body_data,content_type_json(),accept_json())
+    login_resp    <- POST("https://www.matchbook.com/bpapi/rest/security/session", body=body_data,content_type_json(),accept_json(),add_headers('User-Agent'='rlibnf'))
     status_code   <- login_resp$status_code
     if(status_code==200)
     {
       login_resp_content <- fromJSON(content(login_resp, "text", "application/json"))
       session_token      <- login_resp_content$`session-token`
       user_id            <- login_resp_content$`user-id`
+      language           <- login_resp_content$`account`$`language`
+      odds_type          <- login_resp_content$`account`$`odds-type`
+      currency           <- login_resp_content$`account`$`currency`
+      user_name          <- login_resp_content$`account`$`username`
     }
-    login_return <- list(status_code=status_code,session_token=session_token,user_id=user_id)
+    login_return <- list(status_code=status_code,session_token=session_token,user_id=user_id,language=language,odds_type=odds_type,currency=currency,user_name=user_name)
     return(login_return)    
   }
 }
