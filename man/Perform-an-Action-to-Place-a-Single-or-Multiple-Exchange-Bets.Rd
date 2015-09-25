@@ -8,7 +8,7 @@
 mb_bet_place(session_data, runner_id, side, stake, odds)
 }
 \arguments{
-\item{session_data}{An session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
+\item{session_data}{A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
 
 \item{runner_id}{The id of the runner that you want to place a bet on.}
 

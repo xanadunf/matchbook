@@ -9,7 +9,7 @@ mb_get_events(session_data, start_date = Sys.Date(), end_date = Sys.Date() +
   2, sport_ids = c(15), market_states = c("open", "suspended"))
 }
 \arguments{
-\item{session_data}{An session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
+\item{session_data}{A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
 
 \item{start_date}{A string (or date/POSIXct) value with format YYYY-mm-dd or YYYY-mm-dd HH:MM:SS format. Defaults to events starting today .}
 

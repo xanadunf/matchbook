@@ -12,7 +12,7 @@ mb_get_markets(session_data, event_id, market_states = c("open", "suspended"),
   include_runners = FALSE, include_prices = FALSE)
 }
 \arguments{
-\item{session_data}{An session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
+\item{session_data}{A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
 
 \item{event_id}{The event_id integer for which a list of associated markets is required.}
 

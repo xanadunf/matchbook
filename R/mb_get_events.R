@@ -1,7 +1,7 @@
 #' Get List of Available Events
 #' @name List Available Events
 #' @description List the Events Available on Matchbook.com
-#' @param session_data An session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
+#' @param session_data A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
 #' @param start_date A string (or date/POSIXct) value with format YYYY-mm-dd or YYYY-mm-dd HH:MM:SS format. Defaults to events starting today .
 #' @param end_date A string (or date/POSIXct) value with format YYYY-mm-dd or YYYY-mm-dd HH:MM:SS format. Defaults to events starting before two days time.
 #' @param sport_ids A vector of integer sport_ids that indicated sports for which event details are required. e.g. c(15,1) gives Soccer and Pro Football (NFL)
@@ -18,7 +18,7 @@ mb_get_events <- function(session_data,start_date=Sys.Date(),end_date=Sys.Date()
   valid_market_states<- c("suspended","open")
   content            <- NULL
   if(is.null(session_data)){
-    print(paste("You have not provided data about your session in the session_data parameter. Please execute mb_login() and save the resulting object in a variable e.g. my_session <- mb_login(username,pwd); and pass session_data=my_session as a parameter in this function."));return(content)
+    print(paste("You have not provided data about your session in the session_data parameter. Please execute mb_login('my_user_name','verysafepassword') and save the resulting object in a variable e.g. my_session <- mb_login(username,pwd); and pass session_data=my_session as a parameter in this function."));return(content)
   }
   if(sum(sport_ids%%1)>0){
     print(paste("All sport_ids values must be integers. Please amend and try again."));return(content)

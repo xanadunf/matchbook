@@ -1,7 +1,7 @@
 #' Get List of Current Bets on Matchbook
 #' @name List Current Bets
 #' @description List the first 500 bets that have been made on Matchbook events that have not yet settled.
-#' @param session_data An session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
+#' @param session_data A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
 #' @param event_ids A vector of event_ids for which a list of current bets is required. This is an optional parameter and the default is to return bets from all events unless market_ids or runner_ids are specified.
 #' @param market_ids A vector of market_ids for which a list of current bets is required. This is an optional parameter and the default is to return bets from all markets unless event_ids or runner_ids are specified.
 #' @param runner_ids A vector of runner_ids for which a list of current bets is required. This is an optional parameter and the default is to return bets from all runners unless event_ids or market_ids are specified.
@@ -26,7 +26,7 @@ mb_get_bets <- function(session_data,event_ids=NULL,market_ids=NULL,runner_ids=N
   
   content            <- NULL
   if(is.null(session_data)){
-    print(paste("You have not provided data about your session in the session_data paramteter. Please execute mb_login() and save the resulting object in a variable e.g. my_session <- mb_login(username,pwd); and pass session_data=my_session as a parameter in this function."));return(content)
+    print(paste("You have not provided data about your session in the session_data paramteter. Please execute mb_login('my_user_name','verysafepassword') and save the resulting object in a variable e.g. my_session <- mb_login(username,pwd); and pass session_data=my_session as a parameter in this function."));return(content)
   }
   if(!is.null(event_ids)){
     if(event_ids%%1>0) print(paste("The event_ids must be integers. Please amend and try again."));return(content)

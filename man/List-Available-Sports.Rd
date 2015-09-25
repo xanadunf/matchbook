@@ -8,7 +8,7 @@
 mb_get_sports(session_data, status = "active")
 }
 \arguments{
-\item{session_data}{An session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
+\item{session_data}{A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
 
 \item{status}{A string with value one of 'active', 'pending'}
 }

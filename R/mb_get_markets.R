@@ -1,7 +1,7 @@
 #' Get List of Available Markets for a given Event
 #' @name List Available Markets for an Event
 #' @description List the Markets Available on Matchbook.com for a given Event
-#' @param session_data An session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
+#' @param session_data A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
 #' @param event_id The event_id integer for which a list of associated markets is required.
 #' @param sport_ids A vector of integer sport_ids that indicated sports for which event details are required. e.g. c(15,1) gives Soccer and Pro Football (NFL)
 #' @param market_states A vector of string containing the market states to return. Defaults to 'open' or 'suspended' market types.
@@ -26,7 +26,7 @@ mb_get_markets <- function(session_data,event_id,market_states = c("open","suspe
   
   content            <- NULL
   if(is.null(session_data)){
-    print(paste("You have not provided data about your session in the session_data parameter. Please execute mb_login() and save the resulting object in a variable e.g. my_session <- mb_login(username,pwd); and pass session_data=my_session as a parameter in this function."));return(content)
+    print(paste("You have not provided data about your session in the session_data parameter. Please execute mb_login('my_user_name','verysafepassword') and save the resulting object in a variable e.g. my_session <- mb_login(username,pwd); and pass session_data=my_session as a parameter in this function."));return(content)
   }
   if(event_id%%1>0){
     print(paste("The event_id must be an integer. Please amend and try again."));return(content)

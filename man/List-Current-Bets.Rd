@@ -10,7 +10,7 @@ mb_get_bets(session_data, event_ids = NULL, market_ids = NULL,
   interval = 0, language = "en")
 }
 \arguments{
-\item{session_data}{An session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
+\item{session_data}{A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
 
 \item{event_ids}{A vector of event_ids for which a list of current bets is required. This is an optional parameter and the default is to return bets from all events unless market_ids or runner_ids are specified.}
 
