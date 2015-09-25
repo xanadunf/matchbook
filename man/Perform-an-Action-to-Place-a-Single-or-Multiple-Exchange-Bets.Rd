@@ -22,7 +22,7 @@ mb_bet_place(session_data, runner_id, side, stake, odds)
 The status and details of your bet placement are returned.
 }
 \description{
-This function provide the core bet placement functionality. Its possible to place a simgle bet by entering in a single value for each of the runner_id, side, odds and stake parameters. It also possible to place multiple bets multiple bets at once by passing a vector for each of the runner_id, side, odds and stake parameters. In this instance, its imperative that the order in each of the vectors is preserved i.e. that the runner_id, side, odds and stake for the first bet are the first elements of each parameter vector, and that the runner_id, side, odds and stake values for the second bet are the second elements of each parameter vector and so on. There is a cap of 20 on the number of bets that can be placed at one time.
+This function provide the core bet placement functionality. Its possible to place a single bet by entering in a single value for each of the runner_id, side, odds and stake parameters. It also possible to place multiple bets at once by passing a vector for each of the runner_id, side, odds and stake parameters. In this instance, its imperative that the order in each of the vectors is preserved i.e. that the runner_id, side, odds and stake for the first bet are the first elements of each parameter vector, and that the runner_id, side, odds and stake values for the second bet are the second elements of each parameter vector and so on. There is a cap of 20 on the number of bets that can be placed at one time.
 }
 \examples{
 \dontrun{my_session <- mb_login("my_user_name","verysafepassword");
