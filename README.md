@@ -34,7 +34,7 @@ The following functions provide the core betting functionality.
 * **mb_bet_update**
 * **mb_bet_cancel**
 
-In order to obtain details on bets that have settled the following functions can be used.
+In order to obtain details on bets that have settled the following function can be used. Again, full function parameters can be see in the R documentation (?mb_get_settled)
 
 * **mb_get_settled**
 
@@ -49,7 +49,7 @@ library(matchbook)
 username <- "my_user_name"
 password <- "verysafepassword"
 session_details <- mb_login(username,password)
- ```
+```
  
 Since we are betting on football, we need to find out the id of that sport.
 ``` 
