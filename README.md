@@ -25,14 +25,17 @@ The following functions provide the ability to get information on the sports tha
 
 I
 The following function can be used to obtain details of any bets that have been placed but have not yet settled. Both details of unmatched and matched bets can be obtained. See the R documentation for more details (e.g. ? mb_get_bets)
+
 * mb_get_bets
 
 The following functions provide the core betting functionality.
+
 * mb_bet_place
 * mb_bet_update
 * mb_bet_cancel
 
 In order to obtain details on bets that have settled the following functions can be used.
+
 * mb_get_settled
 
 * * *
