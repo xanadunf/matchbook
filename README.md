@@ -52,6 +52,7 @@ session_details <- mb_login(username,password)
 ```
  
 Since we are betting on football, we need to find out the id of that sport.
+
 ``` 
 mb_get_sports(session_details)
  ```
