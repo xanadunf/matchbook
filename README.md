@@ -2,12 +2,14 @@
 
 This R package provides some simple functions to enable interaction with the Matchbook.com RESTful API service.
 
+* * *
 # Pre-requisites 
 
 * a valid Matchbook.com username and password
 * R-version >= 3.0
 * R-packages: httr, jsonlite
 
+* * *
 # Supported Functions
 
 ## Account verification
@@ -30,12 +32,15 @@ This R package provides some simple functions to enable interaction with the Mat
 ## Settled Bet Details
 * mb_get_settled
 
-
+* * *
 # Quickstart Tutorial
 
+* * *
 # Bug-Reporting
 
+* * *
 # Development Roadmap
 
+* * *
 # Disclaimer
 
