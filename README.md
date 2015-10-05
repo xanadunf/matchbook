@@ -55,7 +55,6 @@ Since we are betting on football, we need to find out the id of that sport.
 ``` 
 sport_id_data <- mb_get_sports(session_details)
 sport_id_data
-
  ```
 
 
