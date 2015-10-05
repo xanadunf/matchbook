@@ -10,7 +10,7 @@ This R package provides some simple functions to enable interaction with the Mat
 * R-packages: httr, jsonlite
 
 * * *
-# Supported Functions
+# *Supported Functions*
 
 The following two functions aid with session Account verification
 
@@ -39,7 +39,7 @@ In order to obtain details on bets that have settled the following function can 
 * **mb_get_settled**
 
 * * *
-# Quickstart Tutorial
+# *Quickstart Tutorial*
 This should help you get up and running in a very short time, assuming that you have met the pre-requisites.
 Lets set a target in this tutorial to place a bet on the first football team that contains the name 'man'.
 
@@ -66,11 +66,8 @@ mb_get_markets(session_data=session_details,event_id=311332)
 ## Place a Bet
 
 * * *
-# Bug-Reporting
+# *Bug-Reporting*
 
 * * *
-# Development Roadmap
-
-* * *
-# Disclaimer
+# *Disclaimer*
 
