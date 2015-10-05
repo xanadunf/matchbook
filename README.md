@@ -3,7 +3,7 @@
 This R package provides some simple functions to enable interaction with the Matchbook.com RESTful API service.
 
 * * *
-# Pre-requisites 
+# *Pre-requisites* 
 
 * a valid Matchbook.com username and password
 * R-version >= 3.0
@@ -36,10 +36,21 @@ This R package provides some simple functions to enable interaction with the Mat
 # Quickstart Tutorial
 
 ## Login
-``` library(matchbook)
-``` library(matchbook)
+``` 
+library(matchbook)
+username <- "my_user_name"
+password <- "verysafepassword"
+session_details <- mb_login(username,password)
+ ```
 ## Get Event/Market/Runner Details
+``` 
+mb_get_sports(session_details)
+mb_get_events(session_data=session_details,sport_ids=c(15,9))
+mb_get_markets(session_data=session_details,event_id=311332)
+ ```
+
 ## Get Prices
+
 ## Place a Bet
 
 * * *
