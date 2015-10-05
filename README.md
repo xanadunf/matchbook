@@ -50,12 +50,12 @@ username <- "my_user_name"
 password <- "verysafepassword"
 session_details <- mb_login(username,password)
 ```
- 
-Since we are betting on football, we need to find out the id of that sport.
-``` 
+ Since we are betting on football, we need to find out the id of that sport.
+
+```
 sport_id_data <- mb_get_sports(session_details)
 sport_id_data
- ```
+```
 
 
 mb_get_events(session_data=session_details,sport_ids=c(15,9))
