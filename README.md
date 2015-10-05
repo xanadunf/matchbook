@@ -36,24 +36,29 @@ The following functions provide the core betting functionality.
 
 In order to obtain details on bets that have settled the following functions can be used.
 
-* **mb_get_settled
+* **mb_get_settled**
 
 * * *
 # Quickstart Tutorial
+This should help you get up and running in a very short time, assuming that you have met the pre-requisites.
+Lets set a target in this tutorial to place a bet on the first football team that contains the name 'man'.
 
-## Login
+To start, you need to login with your Matchbook.com account credentials.
 ``` 
 library(matchbook)
 username <- "my_user_name"
 password <- "verysafepassword"
 session_details <- mb_login(username,password)
  ```
-## Get Event/Market/Runner Details
+ 
+Since we are betting on football, we need to find out the id of that sport.
 ``` 
 mb_get_sports(session_details)
+ ```
+
+
 mb_get_events(session_data=session_details,sport_ids=c(15,9))
 mb_get_markets(session_data=session_details,event_id=311332)
- ```
 
 ## Get Prices
 
