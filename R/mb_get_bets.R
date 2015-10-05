@@ -1,5 +1,5 @@
 #' Get List of Current Bets on Matchbook
-#' @name List Current Bets
+#' @name mb_get_bets
 #' @description List the first 500 bets that have been made on Matchbook events that have not yet settled.
 #' @param session_data A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
 #' @param event_ids A vector of event_ids for which a list of current bets is required. This is an optional parameter and the default is to return bets from all events unless market_ids or runner_ids are specified.

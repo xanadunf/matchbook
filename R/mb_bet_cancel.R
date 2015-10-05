@@ -1,6 +1,6 @@
 #' Perform a Bet Cancel Action
-#' @name Perform an Action to Cancel a Single or Multiple Exchange Bets
-#' @description This function provides bet cancellation functionality. Its possible to cancel a single bet by entering in a single value for the offer_id parameter. It also possible to cancel multiple bets at once by passing a vector of the offer_id parameter. Its also possible to cancel all bets from a given market, event or runner or vector of market, event or runner.
+#' @name mb_bet_cancel
+#' @description This function provides bet cancellation functionality. It is possible to cancel a single bet by entering in a single value for the offer_id parameter. It is also possible to cancel multiple bets at once by passing a vector of the offer_id parameter. It is also possible to cancel all bets from a given market, event or runner by entering the corresponding ids.
 #' @param session_data A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
 #' @param offer_id The offer_id or vector of offer_ids that you want to cancel. 
 #' @param event_id The event_id or vector of event_ids that you want to cancel. 

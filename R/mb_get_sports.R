@@ -1,5 +1,5 @@
 #' Get List of Available Sports 
-#' @name List Available Sports
+#' @name mb_get_sports
 #' @description List the Sports Available on Matchbook.com
 #' @param session_data A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
 #' @param status  A string with value one of 'active', 'pending'

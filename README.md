@@ -1,29 +1,16 @@
-# README #
+# Matchbook.com API R package #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+# Overview
 
-### What is this repository for? ###
+# Pre-requisites 
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+# Supported Functions
 
-### How do I get set up? ###
+# Quickstart Tutorial
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+# Bug-Reporting
 
-### Contribution guidelines ###
+# Development Roadmap
 
-* Writing tests
-* Code review
-* Other guidelines
+# Disclaimer
 
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact

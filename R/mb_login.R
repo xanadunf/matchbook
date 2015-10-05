@@ -1,5 +1,5 @@
 #' Login and Authenticate with the Matchbook.com API
-#' @name Login and Authentication
+#' @name mb_login
 #' @description Validate your session with the Matchbook API.
 #' @param username Your Matchbook.com username. If you are not already registered got to: https://www.matchbook.com/
 #' @param password The password provided to you by email by the Matchbook.com team.

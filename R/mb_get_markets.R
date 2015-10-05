@@ -1,5 +1,5 @@
 #' Get List of Available Markets for a given Event
-#' @name List Available Markets for an Event
+#' @name mb_get_markets
 #' @description List the Markets Available on Matchbook.com for a given Event
 #' @param session_data A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
 #' @param event_id The event_id integer for which a list of associated markets is required.

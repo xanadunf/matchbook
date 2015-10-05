@@ -1,5 +1,5 @@
 #' Perform a Bet Update Action
-#' @name Perform an Action to Update a Single or Multiple Exchange Bets
+#' @name mb_bet_update
 #' @description This function provides bet update functionality. Its possible to update a single bet by entering in a single value for each of the offer_id, side, odds and stake parameters. It also possible to update multiple bets at once by passing a vector for each of the offer_id, side, odds and stake parameters. In this instance, its imperative that the order in each of the vectors is preserved i.e. that the runner_id, side, odds and stake for the first update are the first elements of each parameter vector, and that the offer_id, side, odds and stake values for the second update are the second elements of each parameter vector and so on. There is a cap of 25 on the number of updates that can be placed at one time.
 #' @param session_data A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
 #' @param offer_id The id of the offer that you want to update. 

@@ -1,5 +1,5 @@
 #' Logout of the Matchbook.com API session
-#' @name Logout and Session termination
+#' @name mb_logout
 #' @description End the Matchbook.com session.
 #' @param session_data This is a required paramter contianin security and preference information. Its an object that must take the exact format of an mb_login request. 
 #' @return The response insteger status_code.

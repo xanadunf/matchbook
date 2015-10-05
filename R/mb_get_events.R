@@ -1,5 +1,5 @@
 #' Get List of Available Events
-#' @name List Available Events
+#' @name mb_get_events
 #' @description List the Events Available on Matchbook.com
 #' @param session_data A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
 #' @param start_date A string (or date/POSIXct) value with format YYYY-mm-dd or YYYY-mm-dd HH:MM:SS format. Defaults to events starting today .
