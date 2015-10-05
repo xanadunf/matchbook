@@ -35,6 +35,13 @@ This R package provides some simple functions to enable interaction with the Mat
 * * *
 # Quickstart Tutorial
 
+## Login
+``` library(matchbook)
+``` library(matchbook)
+## Get Event/Market/Runner Details
+## Get Prices
+## Place a Bet
+
 * * *
 # Bug-Reporting
 
