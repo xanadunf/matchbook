@@ -55,19 +55,20 @@ session_details <- mb_login(username,password)
 ```
 sport_id_data <- mb_get_sports(session_details)
 sport_id_data
-sport_id_data$id[which(sport_id_data$name=="Soccer")]
+football_sport_id <- sport_id_data$id[which(sport_id_data$name=="Soccer")]
+football_sport_id
 ```
 
 From the results, we can see that football has sport id=15. We can use this to get any football events with a team containing the 'man' string.
 
 ```
-event_data <- mb_get_events(session_data=session_details,sport_ids=c(15))
+event_data <- mb_get_events(session_data=session_details,sport_ids=football_sport_id)
 event_data[grep("man", event_data$name),]
 ```
-Obviously, depending on when you run this, you may have many or no results. At the time running, the 'Republic of Ireland vs Germany' event comes up first with event_id=312064. 
+Obviously, depending on when you run this, you may have many or no results. At the time running, the 'Republic of Ireland vs Germany' event comes up first with event_id=312064. Lets get all of the market data for this event. Since we want to bet on the match outcome, we will try to extract the 'single-winner-wins' market type.
 ```
 market_data <- mb_get_markets(session_data=session_details,event_id=312064)
-event_data[grep("man", event_data$name),]
+market_data$id[market_data$'grading-type'=="single-winner-wins"]
 ```
 
 
