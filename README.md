@@ -1,6 +1,6 @@
 # Matchbook.com API R package #
 
-This R package provides some simple functions to enable interaction with the \href{http://www.matchbook.com}{Matchbook.com} RESTful API service.
+This R package provides some simple functions to enable interaction with the [Matchbook.com](http://www.matchbook.com) RESTful API service.
 
 * * *
 # *Pre-requisites* 
@@ -43,7 +43,7 @@ In order to obtain details on bets that have settled the following function can 
 This should help you get up and running in a very short time, assuming that you have met the pre-requisites.
 Lets set a target in this tutorial to place a bet on the first football game we find that contains the name 'man'. We will proceed to place 5 on the home team to win the game outright.
 
-To start, you need to login with your \href{http://www.matchbook.com}{Matchbook.com} account credentials.
+To start, you need to login with your [Matchbook.com](http://www.matchbook.com) account credentials.
 ``` 
 library(matchbook)
 username <- "my_user_name"
@@ -68,7 +68,7 @@ test_event_id <- event_data$id[grep("man", event_data$name)[1]]
 test_event_id
 
 ```
-Obviously, depending on when you run this, you may have many or no results. At the time running, the 'Republic of Ireland vs Germany' event comes up first with event_id=312064. Lets get all of the market data for this event. Since we want to bet on the match outcome, we will try to extract the 'single-winner-wins' market type.
+Obviously, depending on when you run this, you may have many or no results. Lets get all of the market data for this event. Since we want to bet on the match outcome, we will try to extract the 'single-winner-wins' market type.
 ```
 market_data <- mb_get_markets(session_data=session_details,event_id=test_event_id,include_runners=TRUE)
 market_data
