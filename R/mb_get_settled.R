@@ -10,7 +10,8 @@
 #' @seealso \code{\link{mb_get_bets},\link{mb_get_events}}
 #' @export 
 #' @examples
-#' \dontrun{mb_get_settled(session_data=my_session,event_id=309912)}
+#' \dontrun{my_session <- mb_login("my_user_name","verysafepassword"); 
+#' mb_get_settled(session_data=my_session,event_id=309912)}
 #' 
 
 mb_get_settled <- function(session_data,sport_id=NULL,period=NULL,start_date=Sys.Date()-90,end_date=Sys.Date())

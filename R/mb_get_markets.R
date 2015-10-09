@@ -3,7 +3,7 @@
 #' @description List the Markets Available on Matchbook.com for a given Event
 #' @param session_data A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
 #' @param event_id The event_id integer for which a list of associated markets is required.
-#' @param sport_ids A vector of integer sport_ids that indicated sports for which event details are required. e.g. c(15,1) gives Soccer and Pro Football (NFL)
+#' @param sport_ids A vector of integer sport_ids that indicate sports for which market details are required. e.g. c(15,1) gives Soccer and Pro Football (NFL)
 #' @param market_states A vector of string containing the market states to return. Defaults to 'open' or 'suspended' market types.
 #' @param market_types A vector of strings containing the required market types. Valid market types are either 'multirunner' or 'binary'. Both are returned by default.
 #' @param grading_types A vector of strings containing the required grading types. Valid grading types are 'asian-handicap','high-score-wins','low-score-wins','point-spread','point-total','single-winner-wins'. All are returned by default.
@@ -13,7 +13,8 @@
 #' @seealso \code{\link{mb_get_sports},\link{mb_get_events}}
 #' @export 
 #' @examples
-#' \dontrun{mb_get_markets(event_id=309912)}
+#' \dontrun{my_session <- mb_login("my_user_name","my_password"); 
+#' mb_get_markets(event_id=309912)}
 #' 
 
 mb_get_markets <- function(session_data,event_id,market_states = c("open","suspended"),market_types=c("multirunner","binary"),grading_types=c('asian-handicap','high-score-wins','low-score-wins','point-spread','point-total','single-winner-wins'),include_runners=FALSE,include_prices=FALSE)
@@ -30,6 +31,9 @@ mb_get_markets <- function(session_data,event_id,market_states = c("open","suspe
   }
   if(event_id%%1>0){
     print(paste("The event_id must be an integer. Please amend and try again."));return(content)
+  }
+  if(length(event_id)>1){
+    print(paste("The event_id must be a single integer. Please amend and try again."));return(content)
   }
   if(sum(!is.element(market_states,valid_market_states))>0){
     print(paste("All market_states values must be one of",paste(valid_market_states,collapse=","),". Please amend and try again."));return(content)

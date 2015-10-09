@@ -1,6 +1,6 @@
 # Matchbook.com API R package #
 
-This R package provides some simple functions to enable interaction with the Matchbook.com RESTful API service.
+This R package provides some simple functions to enable interaction with the \href{http://www.matchbook.com}{Matchbook.com} RESTful API service.
 
 * * *
 # *Pre-requisites* 
@@ -12,7 +12,7 @@ This R package provides some simple functions to enable interaction with the Mat
 * * *
 # *Supported Functions*
 
-The following two functions aid with session Account verification
+The following two functions aid with account session verification
 
 * **mb_login**
 * **mb_logout**
@@ -41,9 +41,9 @@ In order to obtain details on bets that have settled the following function can 
 * * *
 # *Quickstart Tutorial*
 This should help you get up and running in a very short time, assuming that you have met the pre-requisites.
-Lets set a target in this tutorial to place a bet on the first football team that contains the name 'man'.
+Lets set a target in this tutorial to place a bet on the first football game we find that contains the name 'man'. We will proceed to place 5 on the home team to win the game outright.
 
-To start, you need to login with your Matchbook.com account credentials.
+To start, you need to login with your \href{http://www.matchbook.com}{Matchbook.com} account credentials.
 ``` 
 library(matchbook)
 username <- "my_user_name"
@@ -55,11 +55,23 @@ session_details <- mb_login(username,password)
 ```
 sport_id_data <- mb_get_sports(session_details)
 sport_id_data
+sport_id_data$id[which(sport_id_data$name=="Soccer")]
+```
+
+From the results, we can see that football has sport id=15. We can use this to get any football events with a team containing the 'man' string.
+
+```
+event_data <- mb_get_events(session_data=session_details,sport_ids=c(15))
+event_data[grep("man", event_data$name),]
+```
+Obviously, depending on when you run this, you may have many or no results. At the time running, the 'Republic of Ireland vs Germany' event comes up first with event_id=312064. 
+```
+market_data <- mb_get_markets(session_data=session_details,event_id=312064)
+event_data[grep("man", event_data$name),]
 ```
 
 
-mb_get_events(session_data=session_details,sport_ids=c(15,9))
-mb_get_markets(session_data=session_details,event_id=311332)
+
 
 ## Get Prices
 
@@ -67,6 +79,10 @@ mb_get_markets(session_data=session_details,event_id=311332)
 
 * * *
 # *Bug-Reporting*
+
+* * *
+# *Future Development*
+* add pagination to the results of calls where applicable.
 
 * * *
 # *Disclaimer*

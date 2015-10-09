@@ -5,8 +5,7 @@
 \title{Get List of Current Bets on Matchbook}
 \usage{
 mb_get_bets(session_data, event_ids = NULL, market_ids = NULL,
-  runner_ids = NULL, sides = c("back"), status = c("matched"),
-  interval = 0, language = "en")
+  runner_ids = NULL, sides = NULL, status = NULL, interval = 0)
 }
 \arguments{
 \item{session_data}{A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
@@ -17,13 +16,11 @@ mb_get_bets(session_data, event_ids = NULL, market_ids = NULL,
 
 \item{runner_ids}{A vector of runner_ids for which a list of current bets is required. This is an optional parameter and the default is to return bets from all runners unless event_ids or market_ids are specified.}
 
-\item{sides}{A filter to allow selection of either 'back' or 'lay' bets. The default is to return 'back' bets.}
+\item{sides}{A filter to allow selection of either 'back' or 'lay' bets. The default is to return both types.}
 
-\item{status}{The bet status from one of the possible options ('matched','unmatched','cancelled','expired','opened','paused'). By default 'matched' bets are returned.}
+\item{status}{The bet status from one of the possible options ('matched','unmatched','cancelled','expired','opened','paused'). By default matched and unmatched bets are returned.}
 
 \item{interval}{Time filter (in seconds) to allow selection of bets that were created or updated in the period between the currnet time and the current time minus the specified number of seconds.}
-
-\item{language}{A string with the language parameter e.g. 'en'}
 }
 \value{
 If successful, a dataframe with first 500 bets and associated information. Only 500 bets are permitted at one time. Pagination is possible but not implemented in this version.
@@ -32,7 +29,8 @@ If successful, a dataframe with first 500 bets and associated information. Only 
 List the first 500 bets that have been made on Matchbook events that have not yet settled.
 }
 \examples{
-\dontrun{my_session <- mb_login("my_user_name","my_password"); mb_get_bets(session_data=my_session)}
+\dontrun{my_session <- mb_login("my_user_name","my_password");
+mb_get_bets(session_data=my_session)}
 }
 \seealso{
 \code{\link{mb_get_sports},\link{mb_get_events},\link{mb_get_markets}}

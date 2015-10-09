@@ -5,25 +5,24 @@
 #' @param event_ids A vector of event_ids for which a list of current bets is required. This is an optional parameter and the default is to return bets from all events unless market_ids or runner_ids are specified.
 #' @param market_ids A vector of market_ids for which a list of current bets is required. This is an optional parameter and the default is to return bets from all markets unless event_ids or runner_ids are specified.
 #' @param runner_ids A vector of runner_ids for which a list of current bets is required. This is an optional parameter and the default is to return bets from all runners unless event_ids or market_ids are specified.
-#' @param sides A filter to allow selection of either 'back' or 'lay' bets. The default is to return 'back' bets.
-#' @param status The bet status from one of the possible options ('matched','unmatched','cancelled','expired','opened','paused'). By default 'matched' bets are returned.
+#' @param sides A filter to allow selection of either 'back' or 'lay' bets. The default is to return both types.
+#' @param status The bet status from one of the possible options ('matched','unmatched','cancelled','expired','opened','paused'). By default matched and unmatched bets are returned.
 #' @param interval Time filter (in seconds) to allow selection of bets that were created or updated in the period between the currnet time and the current time minus the specified number of seconds. 
-#' @param language A string with the language parameter e.g. 'en'
 #' @return If successful, a dataframe with first 500 bets and associated information. Only 500 bets are permitted at one time. Pagination is possible but not implemented in this version.
 #' @seealso \code{\link{mb_get_sports},\link{mb_get_events},\link{mb_get_markets}}
 #' @export 
 #' @examples
-#' \dontrun{my_session <- mb_login("my_user_name","my_password"); mb_get_bets(session_data=my_session)}
+#' \dontrun{my_session <- mb_login("my_user_name","my_password"); 
+#' mb_get_bets(session_data=my_session)}
 #' 
 
-mb_get_bets <- function(session_data,event_ids=NULL,market_ids=NULL,runner_ids=NULL,sides = c("back"),status=c("matched"),interval=0,language="en")
+mb_get_bets <- function(session_data,event_ids=NULL,market_ids=NULL,runner_ids=NULL,sides = NULL,status=NULL,interval=0)
 {
   #todo: runner states, include-prices, price-depth
-  #event_ids=NULL;market_ids=NULL;runner_ids=NULL;sides = c("back");status=c("matched");interval=0;language="en";
+  #event_ids=NULL;market_ids=NULL;runner_ids=NULL;sides = c("back","lay");status=NULL;interval=0;sides=NULL;
   valid_sides        <- c("back","lay")
   valid_status       <- c("matched","unmatched","cancelled","expired","opened","paused")
-  valid_languages    <- c("en","de","es","fr","hi","id","ja","ru","th","zh","zh_HANS","zh_HANT")
-  
+ 
   content            <- NULL
   if(is.null(session_data)){
     print(paste("You have not provided data about your session in the session_data paramteter. Please execute mb_login('my_user_name','verysafepassword') and save the resulting object in a variable e.g. my_session <- mb_login(username,pwd); and pass session_data=my_session as a parameter in this function."));return(content)
@@ -40,9 +39,7 @@ mb_get_bets <- function(session_data,event_ids=NULL,market_ids=NULL,runner_ids=N
   if(sum(!is.element(sides,valid_sides))>0){
     print(paste("All sides values must be one of",paste(valid_sides,collapse=","),". Please amend and try again."));return(content)
   }
-  if(!is.element(language,valid_languages)){
-    print(paste("The language parameter must be one of",paste(valid_languages,collapse=","),". Please amend and try again."));return(content)
-  }
+
   if(sum(!is.element(status,valid_status))>0){
     print(paste("All status values must be one of",paste(valid_status,collapse=","),". Please amend and try again."));return(content)
   }
@@ -50,7 +47,16 @@ mb_get_bets <- function(session_data,event_ids=NULL,market_ids=NULL,runner_ids=N
     print(paste("The interval must be and integer. Please amend and try again."));return(content)
   }
   
-  param_list         <- list('exchange-type'='back-lay','side'=paste(sides,collapse=","),'per-page'='500',language=language,status=paste(status,collapse=","))
+  param_list         <- list('exchange-type'='back-lay','per-page'='500')
+  if(!is.null(sides)){
+    param_list <- c(param_list,'side'=paste(sides,collapse=","))
+  }
+  if(!is.null(status)){
+    if(sum(!is.element(status,valid_status))>0){
+      print(paste("All status values must be one of",paste(valid_status,collapse=","),". Please amend and try again."));return(content)
+    }
+    param_list <- c(param_list,status=paste(status,collapse=","))
+  }
   if(!is.null(event_ids)){
     param_list <- c(param_list,'event-ids'=paste(event_ids,collapse=","))
   }
@@ -74,6 +80,4 @@ mb_get_bets <- function(session_data,event_ids=NULL,market_ids=NULL,runner_ids=N
   }
   return(content)
 }
-
-
 

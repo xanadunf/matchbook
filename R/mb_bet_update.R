@@ -48,7 +48,7 @@ mb_bet_update <- function(session_data,offer_id,runner_id,side,stake,odds)
   status_code        <- update_bet_resp$status_code  
   if(status_code==200)
   {
-    content <- fromJSON(content(update_bet_resp, "text", "application/json"))
+    content <- fromJSON(content(update_bet_resp, "text", "application/json"))$offers
   } else
   {
     print(paste("Warning/Error in communicating with updating bet at https://www.matchbook.com/bpapi/rest/offers",sep=""))

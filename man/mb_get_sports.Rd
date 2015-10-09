@@ -18,7 +18,8 @@ If successful, the list of returned sports data.
 List the Sports Available on Matchbook.com
 }
 \examples{
-\dontrun{mb_get_sports()}
+\dontrun{my_session <- mb_login("my_user_name","my_password");
+mb_get_sports(session_data=my_session)}
 }
 \seealso{
 \code{\link{mb_get_events}}

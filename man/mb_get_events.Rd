@@ -4,17 +4,17 @@
 \alias{mb_get_events}
 \title{Get List of Available Events}
 \usage{
-mb_get_events(session_data, start_date = Sys.Date(), end_date = Sys.Date() +
-  2, sport_ids = c(15), market_states = c("open", "suspended"))
+mb_get_events(session_data, start_date = NULL, end_date = NULL,
+  sport_ids = NULL, market_states = c("open", "suspended"))
 }
 \arguments{
 \item{session_data}{A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
 
-\item{start_date}{A string (or date/POSIXct) value with format YYYY-mm-dd or YYYY-mm-dd HH:MM:SS format. Defaults to events starting today .}
+\item{start_date}{A string (or date/POSIXct) value with format YYYY-mm-dd or YYYY-mm-dd HH:MM:SS format.}
 
-\item{end_date}{A string (or date/POSIXct) value with format YYYY-mm-dd or YYYY-mm-dd HH:MM:SS format. Defaults to events starting before two days time.}
+\item{end_date}{A string (or date/POSIXct) value with format YYYY-mm-dd or YYYY-mm-dd HH:MM:SS format.}
 
-\item{sport_ids}{A vector of integer sport_ids that indicated sports for which event details are required. e.g. c(15,1) gives Soccer and Pro Football (NFL)}
+\item{sport_ids}{A vector of integer sport_ids that indicate sports for which event details are required. e.g. c(15,1) gives Soccer and Pro Football (NFL)}
 
 \item{market_states}{A vector of string containing the market states to return. Defaults to 'open' or 'suspended' market types.}
 }
@@ -25,9 +25,9 @@ If successful, a dataframe with first 500 events and associated information. Onl
 List the Events Available on Matchbook.com
 }
 \examples{
-\dontrun{mb_get_events(sport_ids=15)}
+\dontrun{mb_get_events(session_data=my_session,sport_ids=15)}
 }
 \seealso{
-\code{\link{mb_get_sports}}
+\code{\link{mb_get_sports},\link{mb_get_markets}}
 }
 

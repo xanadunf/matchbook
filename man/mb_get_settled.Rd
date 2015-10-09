@@ -25,7 +25,8 @@ If successful, a dataframe with first 500 settled bets. Only 500 bets are permit
 Get Details of all Settled Bets
 }
 \examples{
-\dontrun{mb_get_settled(session_data=my_session,event_id=309912)}
+\dontrun{my_session <- mb_login("my_user_name","verysafepassword");
+mb_get_settled(session_data=my_session,event_id=309912)}
 }
 \seealso{
 \code{\link{mb_get_bets},\link{mb_get_events}}

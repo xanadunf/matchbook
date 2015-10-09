@@ -25,7 +25,7 @@ mb_get_markets(session_data, event_id, market_states = c("open", "suspended"),
 
 \item{include_prices}{A boolean parameter indicating if the runner prices should be returned or not. Defaults to FALSE.}
 
-\item{sport_ids}{A vector of integer sport_ids that indicated sports for which event details are required. e.g. c(15,1) gives Soccer and Pro Football (NFL)}
+\item{sport_ids}{A vector of integer sport_ids that indicate sports for which market details are required. e.g. c(15,1) gives Soccer and Pro Football (NFL)}
 }
 \value{
 If successful, a dataframe with first 500 markets and associated information. Only 500 markets are permitted at one time. Pagination is possible but not implemented here.
@@ -34,7 +34,8 @@ If successful, a dataframe with first 500 markets and associated information. On
 List the Markets Available on Matchbook.com for a given Event
 }
 \examples{
-\dontrun{mb_get_markets(event_id=309912)}
+\dontrun{my_session <- mb_login("my_user_name","my_password");
+mb_get_markets(event_id=309912)}
 }
 \seealso{
 \code{\link{mb_get_sports},\link{mb_get_events}}
