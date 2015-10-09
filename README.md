@@ -64,19 +64,37 @@ From the results, we can see that football has sport id=15. We can use this to g
 ```
 event_data <- mb_get_events(session_data=session_details,sport_ids=football_sport_id)
 event_data[grep("man", event_data$name),]
+test_event_id <- event_data$id[grep("man", event_data$name)[1]]
+test_event_id
+
 ```
 Obviously, depending on when you run this, you may have many or no results. At the time running, the 'Republic of Ireland vs Germany' event comes up first with event_id=312064. Lets get all of the market data for this event. Since we want to bet on the match outcome, we will try to extract the 'single-winner-wins' market type.
 ```
-market_data <- mb_get_markets(session_data=session_details,event_id=312064)
-market_data$id[market_data$'grading-type'=="single-winner-wins"]
+market_data <- mb_get_markets(session_data=session_details,event_id=test_event_id,include_runners=TRUE)
+market_data
+test_market_id <- market_data$id[market_data$'grading-type'=="single-winner-wins"]
+test_market_id
 ```
+Now that we have the correct market, lets get information for all runners in this market. This time, we include the parameter 'include_prices=TRUE' so that we can see what price each runner is available at. Also, lets select the runner from the resulting data.
+```
+runner_data <- mb_get_runners(session_data=session_details,event_id=test_event_id,market_id=test_market_id,include_prices=TRUE)
+runner_data
+test_runner_id <- runner_data$id[grep("man", runner_data$name)]
+test_runner_id
+```
+Now we have details on all of the runners, lets get details on the prices for the runner that we have selected.
+```
+prices_data <- runner_data$prices[[which(runner_data$id==test_runner_id)]]
+prices_data_back <- prices_data[prices_data$side=="back",]
+best_available_current_price <- min(prices_data_back$'decimal-odds') # min because we are backing, use the max if you are laying. 
+```
+Now that we have found the price levels that we can back at (the volume is also available via 'prices_data_back$'available-amount'') we can place a bet on the runner we have selected. 
+```
+mb_bet_place(session_data=session_details,runner_id=test_runner_id,side='back',stake=2,odds=1.1)
+mb_get_bets(session_data=session_details)
+```
+When the bet is placed, its important to examine the status of the bet. If the status is 'matched' then you have been matched at the price provided. If it is 'unmatched' then the bet has not been fully matched. For further details on placed bets its a good idea to call mb_get_bets(session_data=my_session,runner_id=test_runner_id)
 
-
-
-
-## Get Prices
-
-## Place a Bet
 
 * * *
 # *Bug-Reporting*
@@ -84,6 +102,7 @@ market_data$id[market_data$'grading-type'=="single-winner-wins"]
 * * *
 # *Future Development*
 * add pagination to the results of calls where applicable.
+* add parameter to allow sorting of prices returned.
 
 * * *
 # *Disclaimer*
