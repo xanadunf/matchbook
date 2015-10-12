@@ -4,15 +4,17 @@
 \alias{mb_login}
 \title{Login and Authenticate with the Matchbook.com API}
 \usage{
-mb_login(username, password)
+mb_login(username, password, print_balance_details = TRUE)
 }
 \arguments{
-\item{username}{Your Matchbook.com username. If you are not already registered got to: https://www.matchbook.com/}
+\item{username}{Your Matchbook.com username. If you are not already registered go to \href{www.matchbook.com}{Matchbook.com}.}
 
-\item{password}{The password provided to you by email by the Matchbook.com team.}
+\item{password}{The password set by you during the registration process.}
+
+\item{print_balance_details}{optional parameter to allow balance and exposure display at the time of login}
 }
 \value{
-A list with status_code, user_id and session_token values for your session.
+A list with status_code and other fields relating to your session and account. If the log-in is successful, a status_code of 200 is returned.
 }
 \description{
 Validate your session with the Matchbook API.

@@ -19,9 +19,30 @@ mb_bet_place(session_data, runner_id, side, stake, odds)
 }
 \value{
 The status and details of your bet placement are returned.
+The data frame has the following fields:
+ \describe{
+  \item{id}{the bet id}
+  \item{event-id}{the event id on which the bet was placed}
+  \item{event-name}{the name of the event on which the bet was placed}
+  \item{event-id}{the event id on which the bet was placed}
+  \item{market-id}{the market id on which the bet was placed}
+  \item{market-name}{the name of the market on which the bet was placed}
+  \item{runner-id}{the runner id on which the bet was placed}
+  \item{runner-name}{the name of the runner on which the bet was placed}
+  \item{side}{the side the bet was placed on}
+  \item{odds}{the odds the bet was placed on}
+  \item{decimal-odds}{the decimal version of the odds}
+  \item{stake}{the stake placed}
+  \item{remaining}{this field indicates how much of the original stake placed remains unmatched. If this value is equal to the original stake, the the bet is fully un-matched. If this value is zero, then the bet has been fully matched. Any value in-between indicates a partial match}
+  \item{potential-profit}{the potential profit if the matched component of this wager is successful}
+  \item{remaining-potential-profit}{the potential profit if the un-matched component of this wager is first matched and then has a successful outcome}
+  \item{currency}{The currency the bet stake was placed with}
+  \item{created-at}{The date the bet was placed}
+  \item{status}{The bet status. Status 'open' indicates an unmatched bet, 'matched' indicates a fully matched bet, 'cancelled' indicates a cancelled bet, 'failed' indicates a failed bet placement. For bets with status='open', the 'stake' and 'remaining' fields are key to determining the exact status. If the 'remaining' value is less than 'stake' but greater than zero, then the bet has been partially matched for a 'stake'-'remaining' amount. If the bet is fully un-matched, then the 'stake' and 'remaining' values will be equal.}
+}
 }
 \description{
-This function provide the core bet placement functionality. Its possible to place a single bet by entering in a single value for each of the runner_id, side, odds and stake parameters. It also possible to place multiple bets at once by passing a vector for each of the runner_id, side, odds and stake parameters. In this instance, its imperative that the order in each of the vectors is preserved i.e. that the runner_id, side, odds and stake for the first bet are the first elements of each parameter vector, and that the runner_id, side, odds and stake values for the second bet are the second elements of each parameter vector and so on. There is a cap of 20 on the number of bets that can be placed at one time.
+This function provide the core bet placement functionality. Its possible to place a single bet by entering in a single value for each of the runner_id, side, odds and stake parameters. It also possible to place multiple bets at once by passing a vector for each of the runner_id, side, odds and stake parameters. In this instance, its imperative that the order in each of the vectors is preserved i.e. that the runner_id, side, odds and stake for the first bet are the first elements of each parameter vector, and that the runner_id, side, odds and stake values for the second bet are the second elements of each parameter vector and so on. There is a cap of 20 on the number of bets that can be placed at one time. NOTE: its is very important to note the 'status' field returned after executing this function to ensure that you be has been matched as you expect. See description for more details.
 }
 \examples{
 \dontrun{my_session <- mb_login("my_user_name","verysafepassword");

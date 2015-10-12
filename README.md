@@ -1,6 +1,6 @@
 # Matchbook.com API R package #
 
-This R package provides some simple functions to enable interaction with the [Matchbook.com](http://www.matchbook.com) RESTful API service.
+This R package provides some simple functions to enable interaction with the [Matchbook.com](http://www.matchbook.com) RESTful API service. Please read the documentation carefully for each individual function before use.  A registered [Matchbook.com](http://www.matchbook.com) account is required to use this package.
 
 * * *
 # *Pre-requisites* 

@@ -2,15 +2,15 @@
 % Please edit documentation in R/mb_logout.R
 \name{mb_logout}
 \alias{mb_logout}
-\title{Logout of the Matchbook.com API session}
+\title{Terminate a Matchbook.com API session}
 \usage{
 mb_logout(session_data)
 }
 \arguments{
-\item{session_data}{This is a required paramter contianin security and preference information. Its an object that must take the exact format of an mb_login request.}
+\item{session_data}{This is a required parameter containing security and preference information. It must take the exact format of the object returned by the mb_login request.}
 }
 \value{
-The response insteger status_code.
+The response integer status_code.
 }
 \description{
 End the Matchbook.com session.

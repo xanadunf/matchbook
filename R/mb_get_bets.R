@@ -9,6 +9,30 @@
 #' @param status The bet status from one of the possible options ('matched','unmatched','cancelled','expired','opened','paused'). By default matched and unmatched bets are returned.
 #' @param interval Time filter (in seconds) to allow selection of bets that were created or updated in the period between the currnet time and the current time minus the specified number of seconds. 
 #' @return If successful, a dataframe with first 500 bets and associated information. Only 500 bets are permitted at one time. Pagination is possible but not implemented in this version.
+#' The data frame has the following fields:
+#'  \describe{
+#'   \item{id}{the bet id}
+#'   \item{event-id}{the event id on which the bet was placed}
+#'   \item{event-name}{the name of the event on which the bet was placed}
+#'   \item{event-id}{the event id on which the bet was placed}
+#'   \item{market-id}{the market id on which the bet was placed}
+#'   \item{market-name}{the name of the market on which the bet was placed}
+#'   \item{runner-id}{the runner id on which the bet was placed}
+#'   \item{runner-name}{the name of the runner on which the bet was placed}
+#'   \item{exchange-type}{the exchange type. This should always be 'back-lay'}
+#'   \item{side}{the side the bet was placed on}
+#'   \item{odds}{the odds the bet was placed on}
+#'   \item{odds-type}{the odds-type of the odds field }
+#'   \item{decimal-odds}{the decimal version of the odds}
+#'   \item{stake}{the stake placed}
+#'   \item{remaining}{this field indicates how much of the original stake placed remains un-matched. If this value is equal to the original stake, the the bet is fully un-matched. If this value is zero, then the bet has been fully matched. Any value in-between indicates a partial match}   
+#'   \item{potential-profit}{the potential profit if the matched component of this wager is successful}   
+#'   \item{remaining-potential-profit}{the potential profit if the un-matched component of this wager is first matched and then has a successful outcome}   
+#'   \item{currency}{The currency the bet stake was placed with}   
+#'   \item{created-at}{The date the bet was placed}   
+#'   \item{status}{The bet status. Status 'open' indicates an unmatched bet, 'matched' indicates a fully matched bet, 'cancelled' indicates a cancelled bet. For bets with status='open', the 'stake' and 'remaining' fields are key to determining the exact status. If the 'remaining' value is less than 'stake' but greater than zero, then the bet has been partially matched for a 'stake'-'remaining' amount. If the bet is fully un-matched, then the 'stake' and 'remaining' values will be equal.}   
+#'   \item{temp-id}{the temporary id of the bet}
+#' }
 #' @seealso \code{\link{mb_get_sports},\link{mb_get_events},\link{mb_get_markets}}
 #' @export 
 #' @examples
@@ -18,13 +42,11 @@
 
 mb_get_bets <- function(session_data,event_ids=NULL,market_ids=NULL,runner_ids=NULL,sides = NULL,status=NULL,interval=0)
 {
-  #todo: runner states, include-prices, price-depth
-  #event_ids=NULL;market_ids=NULL;runner_ids=NULL;sides = c("back","lay");status=NULL;interval=0;sides=NULL;
   valid_sides        <- c("back","lay")
   valid_status       <- c("matched","unmatched","cancelled","expired","opened","paused")
  
-  content            <- NULL
-  if(is.null(session_data)){
+  content            <- list(status_code=0)
+  if(is.null(session_data)|!is.list(session_data)){
     print(paste("You have not provided data about your session in the session_data paramteter. Please execute mb_login('my_user_name','verysafepassword') and save the resulting object in a variable e.g. my_session <- mb_login(username,pwd); and pass session_data=my_session as a parameter in this function."));return(content)
   }
   if(!is.null(event_ids)){
@@ -69,14 +91,15 @@ mb_get_bets <- function(session_data,event_ids=NULL,market_ids=NULL,runner_ids=N
   if(interval>0){
     param_list <- c(param_list,interval=interval)
   }
-  get_bets_resp    <- GET(paste("https://www.matchbook.com/bpapi/rest/offers",sep=""),query=param_list,set_cookies('session-token'=session_data$session_token),add_headers('User-Agent'='rlibnf'))  
+  get_bets_resp    <- httr::GET(paste("https://www.matchbook.com/bpapi/rest/offers",sep=""),query=param_list,httr::set_cookies('session-token'=session_data$session_token),httr::add_headers('User-Agent'='rlibnf'))  
   status_code        <- get_bets_resp$status_code  
   if(status_code==200)
   {
-    content <- fromJSON(content(get_bets_resp, "text", "application/json"))$offers
+    content <- jsonlite::fromJSON(content(get_bets_resp, "text", "application/json"))$offers
   } else
   {
     print(paste("Warning/Error in communicating with https://www.matchbook.com/bpapi/rest/offers",sep=""))
+    content$status_code <- status_code
   }
   return(content)
 }

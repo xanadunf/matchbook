@@ -1,11 +1,11 @@
 Package: matchbook
 Type: Package
 Title: Wrapper for the Matchbook.com API
-Version: 1.0.2
+Version: 1.0.3
 Date: 2015-09-22
 Author: Niall Fitzgerald
-Maintainer: Niall Fitzgerald <info@matchbook.com>
-Description: This provides a wrapper for the some basic functionality around the Matchbook.com REST API. It features calls to get events, markets and runners in data frame format. It features functions for bet placement and position managment and also allows reporting of settled bet transactions. Note: the Matchbook.com API allows the view of data in both binary exchange and back-lay format, this library focuses on the back-lay format. Unless otherwise specified, the default for odds type, currency and language are decimal, USD and English respectively.
+Maintainer: Niall Fitzgerald <nfitzgerald@xanadu.ie>
+Description: This provides a wrapper for the some basic functionality around the Matchbook.com REST API. It features calls to get events, markets and runners in data frame format. It features functions for bet placement and position managment and also allows reporting of settled bet transactions. Note: this library uses the back-lay format. The default for odds type, currency and language are set according to those of the registered user account.
 Depends:
     R (>= 3.0),
     httr,

@@ -4,21 +4,25 @@
 \alias{mb_get_sports}
 \title{Get List of Available Sports}
 \usage{
-mb_get_sports(session_data, status = "active")
+mb_get_sports(session_data)
 }
 \arguments{
-\item{session_data}{A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
-
-\item{status}{A string with value one of 'active', 'pending'}
+\item{session_data}{A session object returned from a successful \code{\link{mb_login}} attempt. It contains security details and your account preferences.}
 }
 \value{
-If successful, the list of returned sports data.
+If successful, a data frame with the following fields:
+ \describe{
+  \item{name}{sport name}
+  \item{type}{the type of the sport}
+  \item{id}{sport id}
+  \item{short-name}{two-letter sport name abbreviation}
+  }
 }
 \description{
-List the Sports Available on Matchbook.com
+List the Sports currently available on Matchbook.com
 }
 \examples{
-\dontrun{my_session <- mb_login("my_user_name","my_password");
+\dontrun{my_session <- mb_login("my_user_name","versafepassword");
 mb_get_sports(session_data=my_session)}
 }
 \seealso{

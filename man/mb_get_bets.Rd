@@ -24,6 +24,30 @@ mb_get_bets(session_data, event_ids = NULL, market_ids = NULL,
 }
 \value{
 If successful, a dataframe with first 500 bets and associated information. Only 500 bets are permitted at one time. Pagination is possible but not implemented in this version.
+The data frame has the following fields:
+ \describe{
+  \item{id}{the bet id}
+  \item{event-id}{the event id on which the bet was placed}
+  \item{event-name}{the name of the event on which the bet was placed}
+  \item{event-id}{the event id on which the bet was placed}
+  \item{market-id}{the market id on which the bet was placed}
+  \item{market-name}{the name of the market on which the bet was placed}
+  \item{runner-id}{the runner id on which the bet was placed}
+  \item{runner-name}{the name of the runner on which the bet was placed}
+  \item{exchange-type}{the exchange type. This should always be 'back-lay'}
+  \item{side}{the side the bet was placed on}
+  \item{odds}{the odds the bet was placed on}
+  \item{odds-type}{the odds-type of the odds field }
+  \item{decimal-odds}{the decimal version of the odds}
+  \item{stake}{the stake placed}
+  \item{remaining}{this field indicates how much of the original stake placed remains un-matched. If this value is equal to the original stake, the the bet is fully un-matched. If this value is zero, then the bet has been fully matched. Any value in-between indicates a partial match}
+  \item{potential-profit}{the potential profit if the matched component of this wager is successful}
+  \item{remaining-potential-profit}{the potential profit if the un-matched component of this wager is first matched and then has a successful outcome}
+  \item{currency}{The currency the bet stake was placed with}
+  \item{created-at}{The date the bet was placed}
+  \item{status}{The bet status. Status 'open' indicates an unmatched bet, 'matched' indicates a fully matched bet, 'cancelled' indicates a cancelled bet. For bets with status='open', the 'stake' and 'remaining' fields are key to determining the exact status. If the 'remaining' value is less than 'stake' but greater than zero, then the bet has been partially matched for a 'stake'-'remaining' amount. If the bet is fully un-matched, then the 'stake' and 'remaining' values will be equal.}
+  \item{temp-id}{the temporary id of the bet}
+}
 }
 \description{
 List the first 500 bets that have been made on Matchbook events that have not yet settled.

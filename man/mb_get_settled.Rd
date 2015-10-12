@@ -10,19 +10,29 @@ mb_get_settled(session_data, sport_id = NULL, period = NULL,
 \arguments{
 \item{session_data}{A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
 
+\item{sport_id}{A vector of integer sport_ids that indicated sports for which event details are required. e.g. c(15,1) gives Soccer and Pro Football (NFL)}
+
 \item{period}{A value with one of 'today', '1-day', '2-day', 'yesterday', 'week', 'month', '1-month', '3-month'}
 
 \item{start_date}{A string (or date/POSIXct) value with format YYYY-mm-dd or YYYY-mm-dd HH:MM:SS format. Defaults to 90 days ago.}
 
 \item{end_date}{A string (or date/POSIXct) value with format YYYY-mm-dd or YYYY-mm-dd HH:MM:SS format. Defaults to today.}
-
-\item{sport_ids}{A vector of integer sport_ids that indicated sports for which event details are required. e.g. c(15,1) gives Soccer and Pro Football (NFL)}
 }
 \value{
 If successful, a dataframe with first 500 settled bets. Only 500 bets are permitted at one time. Pagination is possible but not implemented in this version.
+The data frame has the following fields:
+ \describe{
+  \item{stake}{the amount bet}
+  \item{sport-id}{The sport id on which the bet was placed}
+  \item{event-id}{The event id on which the bet was placed}
+  \item{market-id}{The market id on which the bet was placed}
+  \item{market-type}{The market type on which the bet was placed}
+  \item{profit-and-loss}{The amount won or lost on the market}
+  \item{settled-at}{The date the bet was settled}
+}
 }
 \description{
-Get Details of all Settled Bets
+Get Details of all Settled bets
 }
 \examples{
 \dontrun{my_session <- mb_login("my_user_name","verysafepassword");

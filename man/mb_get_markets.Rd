@@ -24,11 +24,23 @@ mb_get_markets(session_data, event_id, market_states = c("open", "suspended"),
 \item{include_runners}{A boolean parameter indicating if the runner names and id should be returned or not. Defaults to FALSE.}
 
 \item{include_prices}{A boolean parameter indicating if the runner prices should be returned or not. Defaults to FALSE.}
-
-\item{sport_ids}{A vector of integer sport_ids that indicate sports for which market details are required. e.g. c(15,1) gives Soccer and Pro Football (NFL)}
 }
 \value{
 If successful, a dataframe with first 500 markets and associated information. Only 500 markets are permitted at one time. Pagination is possible but not implemented here.
+The data frame has the following fields:
+ \describe{
+  \item{name}{Market name}
+  \item{start}{The start date of the market}
+  \item{status}{If betting is still available on this market it will have status='open'}
+  \item{type}{Market name}
+  \item{event-id}{Event id}
+  \item{id}{Market id}
+  \item{runner-ids}{The ids of runners in this market}
+  \item{grading-type}{The type of grading}
+  \item{in-running-flag}{Is the market currently in-running}
+  \item{allow-live-betting}{Is it possible for this market to go in running}
+}
+If include_runners=TRUE, then additional runner information is returned. Also if include_prices=TRUE then price data for the associated runner is returned nested within the data frame.
 }
 \description{
 List the Markets Available on Matchbook.com for a given Event

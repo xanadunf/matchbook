@@ -4,7 +4,7 @@
 \alias{mb_bet_update}
 \title{Perform a Bet Update Action}
 \usage{
-mb_bet_update(session_data, offer_id, runner_id, side, stake, odds)
+mb_bet_update(session_data, offer_id, side, stake, odds)
 }
 \arguments{
 \item{session_data}{A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
@@ -19,6 +19,29 @@ mb_bet_update(session_data, offer_id, runner_id, side, stake, odds)
 }
 \value{
 The status and details of your bet updates are returned.
+The data frame has the following fields:
+ \describe{
+  \item{id}{the bet id}
+  \item{event-id}{the event id on which the original bet was placed}
+  \item{event-name}{the name of the event on which the original bet was placed}
+  \item{event-id}{the event id on which the original bet was placed}
+  \item{market-id}{the market id on which the original bet was placed}
+  \item{market-name}{the name of the market on which the original bet was placed}
+  \item{runner-id}{the runner id on which the original bet was placed}
+  \item{runner-name}{the name of the runner on which the original bet was placed}
+  \item{temp-id}{the temporary id of the update}
+  \item{exchange-type}{the exchange type. This should always be 'back-lay'}
+  \item{side}{the side the bet was placed on}
+  \item{odds}{the odds the bet was placed on}
+  \item{odds-type}{the odds-type of the odds field }
+  \item{decimal-odds}{the decimal version of the odds}
+  \item{stake}{the stake placed}
+  \item{potential-profit}{the potential profit if the matched component of this wager is successful}
+  \item{remaining-potential-profit}{the potential profit if the un-matched component of this wager is first matched and then has a successful outcome}
+  \item{currency}{The currency the bet stake was placed with}
+  \item{created-at}{The date the bet was placed}
+  \item{status}{The bet status. Status 'open' indicates an unmatched bet, 'matched' indicates a fully matched bet, 'cancelled' indicates a cancelled bet. For bets with status='open', the 'stake' and 'remaining' fields are key to determining the exact status. If the 'remaining' value is less than 'stake' but greater than zero, then the bet has been partially matched for a 'stake'-'remaining' amount. If the bet is fully un-matched, then the 'stake' and 'remaining' values will be equal.}
+}
 }
 \description{
 This function provides bet update functionality. Its possible to update a single bet by entering in a single value for each of the offer_id, side, odds and stake parameters. It also possible to update multiple bets at once by passing a vector for each of the offer_id, side, odds and stake parameters. In this instance, its imperative that the order in each of the vectors is preserved i.e. that the runner_id, side, odds and stake for the first update are the first elements of each parameter vector, and that the offer_id, side, odds and stake values for the second update are the second elements of each parameter vector and so on. There is a cap of 25 on the number of updates that can be placed at one time.

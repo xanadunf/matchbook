@@ -7,6 +7,29 @@
 #' @param stake The amount that want to stake for this bet. The currency used is the currency you specified when you set up your Matchbook.com account. A real number format is required.
 #' @param odds The odds you want to place a bet at. The odds type is based on the information from your session_data, which is the default setting saved for your account.
 #' @return The status and details of your bet updates are returned.
+#' The data frame has the following fields:
+#'  \describe{
+#'   \item{id}{the bet id}
+#'   \item{event-id}{the event id on which the original bet was placed}
+#'   \item{event-name}{the name of the event on which the original bet was placed}
+#'   \item{event-id}{the event id on which the original bet was placed}
+#'   \item{market-id}{the market id on which the original bet was placed}
+#'   \item{market-name}{the name of the market on which the original bet was placed}
+#'   \item{runner-id}{the runner id on which the original bet was placed}
+#'   \item{runner-name}{the name of the runner on which the original bet was placed}
+#'   \item{temp-id}{the temporary id of the update}
+#'   \item{exchange-type}{the exchange type. This should always be 'back-lay'}
+#'   \item{side}{the side the bet was placed on}
+#'   \item{odds}{the odds the bet was placed on}
+#'   \item{odds-type}{the odds-type of the odds field }
+#'   \item{decimal-odds}{the decimal version of the odds}
+#'   \item{stake}{the stake placed}
+#'   \item{potential-profit}{the potential profit if the matched component of this wager is successful}   
+#'   \item{remaining-potential-profit}{the potential profit if the un-matched component of this wager is first matched and then has a successful outcome}   
+#'   \item{currency}{The currency the bet stake was placed with}   
+#'   \item{created-at}{The date the bet was placed}   
+#'   \item{status}{The bet status. Status 'open' indicates an unmatched bet, 'matched' indicates a fully matched bet, 'cancelled' indicates a cancelled bet. For bets with status='open', the 'stake' and 'remaining' fields are key to determining the exact status. If the 'remaining' value is less than 'stake' but greater than zero, then the bet has been partially matched for a 'stake'-'remaining' amount. If the bet is fully un-matched, then the 'stake' and 'remaining' values will be equal.}   
+#' }
 #' @seealso \code{\link{mb_get_bets},\link{mb_bet_place},\link{mb_bet_cancel}}
 #' @export 
 #' @examples
@@ -15,12 +38,11 @@
 #' mb_bet_update(session_data=my_session,offer_id=12345,odds=new_odds_value)}
 #' 
 
-mb_bet_update <- function(session_data,offer_id,runner_id,side,stake,odds)
-{ #mb_bet_place(session_data=session_details,runner_id=2265802,side='back',stake=2,odds=5)
-  ##session_data <- mb_login("xan_niallf","xan_n1allf");side=c('back');stake=c(2);offer_id=c(322817036); odds <- c(6)
+mb_bet_update <- function(session_data,offer_id,side,stake,odds)
+{ 
   valid_sides        <- c("back","lay")
-  content            <- NULL
-  if(is.null(session_data)){
+  content            <- list(status_code=0)
+  if(is.null(session_data)|!is.list(session_data)){
     print(paste("You have not provided data about your session in the session_data parameter. Please execute mb_login('my_user_name','verysafepassword') and save the resulting object in a variable e.g. my_session <- mb_login(username,pwd); and pass session_data=my_session as a parameter in this function."));return(content)
   }
   if(sum(is.null(offer_id))>0){
@@ -43,15 +65,16 @@ mb_bet_update <- function(session_data,offer_id,runner_id,side,stake,odds)
   
   update_list <- data.frame(id=offer_id,side=side,stake=stake,odds=odds,check.names=FALSE)
   
-  body_data          <- paste("{'exchange-type':'back-lay','currency':'",session_data$currency,"','odds-type':'",session_data$odds_type,"', 'offers': ",toJSON(update_list,data.frame="rows"),"}",sep="")
-  update_bet_resp    <- PUT(paste("https://www.matchbook.com/bpapi/rest/offers",sep=""),body=body_data,set_cookies('session-token'=session_data$session_token),content_type_json(),accept_json(),add_headers('User-Agent'='rlibnf'))  
+  body_data          <- paste("{'exchange-type':'back-lay','currency':'",session_data$currency,"','odds-type':'",session_data$odds_type,"', 'offers': ",jsonlite::toJSON(update_list,data.frame="rows"),"}",sep="")
+  update_bet_resp    <- httr::PUT(paste("https://www.matchbook.com/bpapi/rest/offers",sep=""),body=body_data,httr::set_cookies('session-token'=session_data$session_token),httr::content_type_json(),httr::accept_json(),httr::add_headers('User-Agent'='rlibnf'))  
   status_code        <- update_bet_resp$status_code  
   if(status_code==200)
   {
-    content <- fromJSON(content(update_bet_resp, "text", "application/json"))$offers
+    content <- jsonlite::fromJSON(content(update_bet_resp, "text", "application/json"))
   } else
   {
     print(paste("Warning/Error in communicating with updating bet at https://www.matchbook.com/bpapi/rest/offers",sep=""))
+    content <- jsonlite::fromJSON(content(update_bet_resp, "text", "application/json"))
   }
   return(content)
 }

@@ -5,8 +5,8 @@
 \title{Get List of Available Runners for a given Market}
 \usage{
 mb_get_runners(session_data, event_id, market_id, runner_id = NULL,
-  side = c("back", "lay"), runner_states = c("open", "suspended"),
-  include_prices = FALSE)
+  runner_states = c("open", "suspended"), include_prices = FALSE,
+  side = c("back", "lay"))
 }
 \arguments{
 \item{session_data}{A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
@@ -17,14 +17,23 @@ mb_get_runners(session_data, event_id, market_id, runner_id = NULL,
 
 \item{runner_id}{If you only require details for a single runner, specify this optional runner_id integer.}
 
-\item{side}{A filter to allow selection of either 'back' or 'lay' bets. The default is to return 'back' bets.}
-
 \item{runner_states}{A vector of string containing the runner states to return. Defaults to 'open' or 'suspended' market types.}
 
 \item{include_prices}{A boolean parameter indicating if the runner prices should be returned or not. Defaults to FALSE.}
+
+\item{side}{A filter to view the selected 'back' or 'lay' prices. The default is to return both.}
 }
 \value{
 If successful, a dataframe with associated runner information.
+The data frame has the following fields:
+ \describe{
+  \item{name}{Runner name}
+  \item{status}{If betting is still available on this runner, it will have status='open'}
+  \item{event-id}{Event id}
+  \item{id}{Runner id}
+  \item{market-id}{Market id}
+}
+If include_prices=TRUE then available prices for each runner are returned nested within the data frame.
 }
 \description{
 List the Runners Available on Matchbook.com for a given Market
