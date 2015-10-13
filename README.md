@@ -3,12 +3,17 @@
 This R package provides some simple functions to enable interaction with the [Matchbook.com](http://www.matchbook.com) RESTful API service. Please read the documentation carefully for each individual function before use.  A registered [Matchbook.com](http://www.matchbook.com) account is required to use this package.
 
 * * *
-# *Pre-requisites* 
+# *Pre-requisites & Installation* 
 
 * a valid Matchbook.com username and password
 * R-version >= 3.0
 * R-packages: httr, jsonlite
 
+To install the package requires the devtools library:
+``` 
+library(devtools)
+install_github("xanadunf/matchbook")
+``` 
 * * *
 # *Supported Functions*
 
@@ -41,15 +46,16 @@ In order to obtain details on bets that have settled the following function can 
 * * *
 # *Quickstart Tutorial*
 This should help you get up and running in a very short time, assuming that you have met the pre-requisites.
-Lets set a target in this tutorial to place a bet on the first football game we find that contains the name 'man'. We will proceed to place 5 on the home team to win the game outright.
+Lets set a target in this tutorial to place a bet on the first football game we find that contains the name 'man'. We will proceed to place a back bet of 5 EUR (or whatever the currency of your account) on the home team to win the game outright.
 
 To start, you need to login with your [Matchbook.com](http://www.matchbook.com) account credentials.
 ``` 
 library(devtools)
 install_github("xanadunf/matchbook")
 library(matchbook)
-username <- "my_user_name"
-password <- "verysafepassword"
+
+username <- "my_user_name"     ### replace with your username
+password <- "verysafepassword" ### replace with your password
 session_details <- mb_login(username,password)
 ```
  Since we are betting on football, we need to find out the id of that sport.
@@ -70,7 +76,8 @@ test_event_id <- event_data$id[grep("man", event_data$name)[1]]
 test_event_id
 
 ```
-Obviously, depending on when you run this, you may have many or no results. Lets get all of the market data for this event. Since we want to bet on the match outcome, we will try to extract the 'single-winner-wins' market type.
+Obviously, depending on when you run this, you may have many or no results. If you dont find a successful result, exchange 'man' for the name of a football team that you know is playing soon. 
+So lets get all of the market data for this event. Since we want to bet on the match outcome, we will try to extract the 'single-winner-wins' market type.
 ```
 market_data <- mb_get_markets(session_data=session_details,event_id=test_event_id,include_runners=TRUE)
 market_data
@@ -100,15 +107,15 @@ When the bet is placed, its important to examine the status of the bet. If the s
 * * *
 # *Status*
 This package is under active development and feedback and suggested improvements are welcome.
-See 
 * * *
 # *Bug-Reporting*
-Please create an issue using the bit-bucket issue button on the left hand side menu.
+Please create an issue using the [Issues](https://github.com/xanadunf/matchbook/issues) area.
 
 * * *
 # *Future Development*
 * add pagination to the results of calls where applicable.
 * add parameter to allow sorting of prices returned.
+* add function to retrieve account details
 
 * * *
 # *Disclaimer*
