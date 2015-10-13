@@ -6,7 +6,7 @@
 #' @param market_ids A vector of market_ids for which a list of current bets is required. This is an optional parameter and the default is to return bets from all markets unless event_ids or runner_ids are specified.
 #' @param runner_ids A vector of runner_ids for which a list of current bets is required. This is an optional parameter and the default is to return bets from all runners unless event_ids or market_ids are specified.
 #' @param sides A filter to allow selection of either 'back' or 'lay' bets. The default is to return both types.
-#' @param status The bet status from one of the possible options ('matched','unmatched','cancelled','expired','opened','paused'). By default matched and unmatched bets are returned.
+#' @param status The bet status from one of the possible options ('matched','unmatched','cancelled','expired','open','paused'). By default matched and unmatched bets are returned. Bets with status 'expired' can no longer be matched. 
 #' @param interval Time filter (in seconds) to allow selection of bets that were created or updated in the period between the currnet time and the current time minus the specified number of seconds. 
 #' @return If successful, a dataframe with first 500 bets and associated information. Only 500 bets are permitted at one time. Pagination is possible but not implemented in this version.
 #' The data frame has the following fields:
@@ -43,7 +43,7 @@
 mb_get_bets <- function(session_data,event_ids=NULL,market_ids=NULL,runner_ids=NULL,sides = NULL,status=NULL,interval=0)
 {
   valid_sides        <- c("back","lay")
-  valid_status       <- c("matched","unmatched","cancelled","expired","opened","paused")
+  valid_status       <- c("matched","unmatched","cancelled","expired","open","paused")
  
   content            <- list(status_code=0)
   if(is.null(session_data)|!is.list(session_data)){

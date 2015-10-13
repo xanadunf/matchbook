@@ -4,13 +4,13 @@
 \alias{mb_bet_cancel}
 \title{Perform a Bet Cancel Action}
 \usage{
-mb_bet_cancel(session_data, offer_id = NULL, event_id = NULL,
+mb_bet_cancel(session_data, bet_id = NULL, event_id = NULL,
   market_id = NULL, runner_id = NULL, cancel_all = FALSE)
 }
 \arguments{
 \item{session_data}{A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
 
-\item{offer_id}{The offer_id or vector of offer_ids that you want to cancel.}
+\item{bet_id}{The bet_id or vector of bet_ids that you want to cancel.}
 
 \item{event_id}{The event_id or vector of event_ids that you want to cancel.}
 
@@ -47,7 +47,7 @@ The data frame has the following fields:
 }
 }
 \description{
-This function provides bet cancellation functionality. It is possible to cancel a single bet by entering in a single value for the offer_id parameter. It is also possible to cancel multiple bets at once by passing a vector of the offer_id parameter. It is also possible to cancel all bets from a given market, event or runner by entering the corresponding ids. NOTE: bets with status 'matched' can not be cancelled.
+This function provides bet cancellation functionality. It is possible to cancel a single bet by entering in a single value for the bet_id parameter. It is also possible to cancel multiple bets at once by passing a vector of the bet_id parameter. It is also possible to cancel all bets from a given market, event or runner by entering the corresponding ids. NOTE: bets with status 'matched' can not be cancelled.
 }
 \examples{
 \dontrun{my_session <- mb_login("my_user_name","verysafepassword");

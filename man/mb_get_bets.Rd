@@ -18,7 +18,7 @@ mb_get_bets(session_data, event_ids = NULL, market_ids = NULL,
 
 \item{sides}{A filter to allow selection of either 'back' or 'lay' bets. The default is to return both types.}
 
-\item{status}{The bet status from one of the possible options ('matched','unmatched','cancelled','expired','opened','paused'). By default matched and unmatched bets are returned.}
+\item{status}{The bet status from one of the possible options ('matched','unmatched','cancelled','expired','open','paused'). By default matched and unmatched bets are returned. Bets with status 'expired' can no longer be matched.}
 
 \item{interval}{Time filter (in seconds) to allow selection of bets that were created or updated in the period between the currnet time and the current time minus the specified number of seconds.}
 }

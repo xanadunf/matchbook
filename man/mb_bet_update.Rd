@@ -4,12 +4,12 @@
 \alias{mb_bet_update}
 \title{Perform a Bet Update Action}
 \usage{
-mb_bet_update(session_data, offer_id, side, stake, odds)
+mb_bet_update(session_data, bet_id, side, stake, odds)
 }
 \arguments{
 \item{session_data}{A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
 
-\item{offer_id}{The id of the offer that you want to update.}
+\item{bet_id}{The id of the bet that you want to update.}
 
 \item{side}{The side that you want place a bet. This has to be one of either 'back' or 'lay'.}
 
@@ -44,12 +44,12 @@ The data frame has the following fields:
 }
 }
 \description{
-This function provides bet update functionality. Its possible to update a single bet by entering in a single value for each of the offer_id, side, odds and stake parameters. It also possible to update multiple bets at once by passing a vector for each of the offer_id, side, odds and stake parameters. In this instance, its imperative that the order in each of the vectors is preserved i.e. that the runner_id, side, odds and stake for the first update are the first elements of each parameter vector, and that the offer_id, side, odds and stake values for the second update are the second elements of each parameter vector and so on. There is a cap of 25 on the number of updates that can be placed at one time.
+This function provides bet update functionality. Its possible to update a single bet by entering in a single value for each of the bet_id, side, odds and stake parameters. It also possible to update multiple bets at once by passing a vector for each of the bet_id, side, odds and stake parameters. In this instance, its imperative that the order in each of the vectors is preserved i.e. that the runner_id, side, odds and stake for the first update are the first elements of each parameter vector, and that the bet_id, side, odds and stake values for the second update are the second elements of each parameter vector and so on. There is a cap of 25 on the number of updates that can be placed at one time.
 }
 \examples{
 \dontrun{my_session <- mb_login("my_user_name","verysafepassword");
 new_odds_value <- 20
-mb_bet_update(session_data=my_session,offer_id=12345,odds=new_odds_value)}
+mb_bet_update(session_data=my_session,bet_id=12345,odds=new_odds_value)}
 }
 \seealso{
 \code{\link{mb_get_bets},\link{mb_bet_place},\link{mb_bet_cancel}}

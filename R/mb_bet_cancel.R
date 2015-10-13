@@ -1,8 +1,8 @@
 #' Perform a Bet Cancel Action
 #' @name mb_bet_cancel
-#' @description This function provides bet cancellation functionality. It is possible to cancel a single bet by entering in a single value for the offer_id parameter. It is also possible to cancel multiple bets at once by passing a vector of the offer_id parameter. It is also possible to cancel all bets from a given market, event or runner by entering the corresponding ids. NOTE: bets with status 'matched' can not be cancelled.
+#' @description This function provides bet cancellation functionality. It is possible to cancel a single bet by entering in a single value for the bet_id parameter. It is also possible to cancel multiple bets at once by passing a vector of the bet_id parameter. It is also possible to cancel all bets from a given market, event or runner by entering the corresponding ids. NOTE: bets with status 'matched' can not be cancelled.
 #' @param session_data A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
-#' @param offer_id The offer_id or vector of offer_ids that you want to cancel. 
+#' @param bet_id The bet_id or vector of bet_ids that you want to cancel. 
 #' @param event_id The event_id or vector of event_ids that you want to cancel. 
 #' @param market_id The market_id or vector of market_ids that you want to cancel. 
 #' @param runner_id The runner_id or vector of runner_ids that you want to cancel. 
@@ -38,22 +38,22 @@
 #' mb_bet_cancel(session_data=my_session,odds=2.5,stake=5,runner_id=12345)}
 #' 
 
-mb_bet_cancel <- function(session_data,offer_id=NULL,event_id=NULL,market_id=NULL,runner_id=NULL,cancel_all=FALSE)
+mb_bet_cancel <- function(session_data,bet_id=NULL,event_id=NULL,market_id=NULL,runner_id=NULL,cancel_all=FALSE)
 { 
   content            <- list(status_code=0)
   if(is.null(session_data)|!is.list(session_data)){
     print(paste("You have not provided data about your session in the session_data parameter. Please execute mb_login('my_user_name','verysafepassword') and save the resulting object in a variable e.g. my_session <- mb_login(username,pwd); and pass session_data=my_session as a parameter in this function."));return(content)
   }
-  if(sum(offer_id%%1)>0) {print(paste("The offer_id values must be in integer format. Please amend and try again."));return(content)}
+  if(sum(bet_id%%1)>0) {print(paste("The bet_id values must be in integer format. Please amend and try again."));return(content)}
   if(sum(event_id%%1)>0) {print(paste("The event_id values must be in integer format. Please amend and try again."));return(content)}
   if(sum(market_id%%1)>0) {print(paste("The market_id values must be in integer format. Please amend and try again."));return(content)}
   if(sum(runner_id%%1)>0) {print(paste("The runner_id values must be in integer format. Please amend and try again."));return(content)}
-  if(sum(!is.null(offer_id))==0&sum(!is.null(event_id))&sum(!is.null(market_id))&sum(!is.null(runner_id))&cancel_all==FALSE){
+  if(sum(!is.null(bet_id))==0&sum(!is.null(event_id))&sum(!is.null(market_id))&sum(!is.null(runner_id))&cancel_all==FALSE){
     print(paste("No bets have been specified for cancellation, pelase try again."));return(content)
   }
   offer_action <- "";event_action <- "";market_action <- "";runner_action <- "";
-  if(sum(!is.null(offer_id))>0){
-    offer_action <- paste(',offer-ids'=paste(offer_id,collapse=","),sep="")
+  if(sum(!is.null(bet_id))>0){
+    offer_action <- paste(',offer-ids'=paste(bet_id,collapse=","),sep="")
   }
   if(sum(!is.null(event_id))>0){
     event_action <- paste(' event-ids'=paste(event_id,collapse=","),sep="")
