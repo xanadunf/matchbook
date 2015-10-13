@@ -56,13 +56,13 @@ mb_bet_cancel <- function(session_data,bet_id=NULL,event_id=NULL,market_id=NULL,
     offer_action <- paste(',offer-ids'=paste(bet_id,collapse=","),sep="")
   }
   if(sum(!is.null(event_id))>0){
-    event_action <- paste(' event-ids'=paste(event_id,collapse=","),sep="")
+    event_action <- paste(',event-ids'=paste(event_id,collapse=","),sep="")
   }
   if(sum(!is.null(market_id))>0){
-    market_action <- paste(' market-ids'=paste(market_id,collapse=","),sep="")
+    market_action <- paste(',market-ids'=paste(market_id,collapse=","),sep="")
   }
   if(sum(!is.null(runner_id))>0){
-    runner_action <- paste(' runner-ids'=paste(runner_id,collapse=","),sep="")
+    runner_action <- paste(',runner-ids'=paste(runner_id,collapse=","),sep="")
   }
   body_data          <- paste("{'exchange-type':'back-lay','currency':'",session_data$currency,"','odds-type':'",session_data$odds_type,"' ",offer_action,event_action,market_action,runner_action,"}",sep="")
   cancel_bet_resp    <- httr::DELETE(paste("https://www.matchbook.com/bpapi/rest/offers",sep=""),body=body_data,httr::set_cookies('session-token'=session_data$session_token),httr::content_type_json(),httr::accept_json(),httr::add_headers('User-Agent'='rlibnf'))  
