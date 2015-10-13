@@ -45,6 +45,8 @@ Lets set a target in this tutorial to place a bet on the first football game we 
 
 To start, you need to login with your [Matchbook.com](http://www.matchbook.com) account credentials.
 ``` 
+library(devtools)
+install_github("xanadunf/matchbook")
 library(matchbook)
 username <- "my_user_name"
 password <- "verysafepassword"
