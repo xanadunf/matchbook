@@ -14,7 +14,9 @@ To install the package requires the devtools library:
 library(devtools)
 install_github("xanadunf/matchbook")
 ``` 
+
 * * *
+
 # *Supported Functions*
 
 The following two functions aid with account session verification
@@ -44,9 +46,10 @@ In order to obtain details on bets that have settled the following function can 
 * **mb_get_settled**
 
 * * *
+
 # *Quickstart Tutorial*
 This should help you get up and running in a very short time, assuming that you have met the pre-requisites.
-Lets set a target in this tutorial to place a bet on the first football game we find that contains the name 'man'. We will proceed to place a back bet of 5 EUR (or whatever the currency of your account) on the home team to win the game outright.
+Let's set a target in this tutorial to place a bet on the first football game we find that contains the name 'man'. We will proceed to place a back bet of 5 EUR (or whatever the currency of your account) on the home team to win the game outright.
 
 To start, you need to login with your [Matchbook.com](http://www.matchbook.com) account credentials.
 ``` 
@@ -108,13 +111,17 @@ mb_get_bets(session_data=my_session,runner_id=test_runner_id)
 ```
 
 * * *
+
 # *Status*
 This package is under active development and feedback and suggested improvements are welcome.
+
 * * *
+
 # *Bug-Reporting*
 Please create an issue using the [Issues](https://github.com/xanadunf/matchbook/issues) area.
 
 * * *
+
 # *Future Development*
 * add pagination to the results of calls where applicable.
 * add parameter to allow sorting of prices returned.
