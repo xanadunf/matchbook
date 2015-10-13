@@ -100,6 +100,10 @@ mb_get_bets <- function(session_data,event_ids=NULL,market_ids=NULL,runner_ids=N
   if(status_code==200)
   {
     content <- jsonlite::fromJSON(content(get_bets_resp, "text", "application/json"))$offers
+  } else if(status_code==401){
+    print(paste("Please login as your session may have expired ...",sep=""))
+    content <- jsonlite::fromJSON(content(cancel_bet_resp, "text", "application/json"))
+    content$status_code <- status_code
   } else
   {
     print(paste("Warning/Error in communicating with https://www.matchbook.com/bpapi/rest/offers",sep=""))
