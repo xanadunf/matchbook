@@ -1,6 +1,6 @@
 # R package for the Matchbook.com API service #
 
-This R package provides some simple functions to enable interaction with the [Matchbook.com](http://www.matchbook.com) RESTful API service. Please read the documentation carefully for each individual function before use.  A registered [Matchbook.com](http://www.matchbook.com) account is required to use this package. Please read the documentation before use.
+This R package provides some simple functions to enable interaction with the [Matchbook.com](http://www.matchbook.com) RESTful API service. Please read the documentation carefully for each individual function before use.  A registered [Matchbook.com](http://www.matchbook.com) account is required to use this package. Please read the documentation fully before use.
 
 * * *
 # *Pre-requisites & Installation* 
@@ -119,7 +119,7 @@ Please create an issue using the [Issues](https://github.com/xanadunf/matchbook/
 * add pagination to the results of calls where applicable.
 * add parameter to allow sorting of prices returned.
 * add function to retrieve account details
-
+* add function to retrieve more detailed settlement report
 * * *
 # *Disclaimer*
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
