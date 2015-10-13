@@ -50,13 +50,13 @@ mb_get_bets <- function(session_data,event_ids=NULL,market_ids=NULL,runner_ids=N
     print(paste("You have not provided data about your session in the session_data paramteter. Please execute mb_login('my_user_name','verysafepassword') and save the resulting object in a variable e.g. my_session <- mb_login(username,pwd); and pass session_data=my_session as a parameter in this function."));return(content)
   }
   if(!is.null(event_ids)){
-    if(event_ids%%1>0) print(paste("The event_ids must be integers. Please amend and try again."));return(content)
+    if(sum(event_ids%%1>0)) print(paste("The event_ids must be integers. Please amend and try again."));return(content)
   }
   if(!is.null(market_ids)){
-    if(market_ids%%1>0)  print(paste("The market_ids must be integers. Please amend and try again."));return(content)
+    if(sum(market_ids%%1>0))  print(paste("The market_ids must be integers. Please amend and try again."));return(content)
   }
   if(!is.null(runner_ids)){
-    if(runner_ids%%1>0) print(paste("The runner_ids must be integers. Please amend and try again."));return(content)
+    if(sum(runner_ids%%1>0)) print(paste("The runner_ids must be integers. Please amend and try again."));return(content)
   }
   if(sum(!is.element(sides,valid_sides))>0){
     print(paste("All sides values must be one of",paste(valid_sides,collapse=","),". Please amend and try again."));return(content)
