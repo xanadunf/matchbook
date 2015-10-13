@@ -49,7 +49,7 @@ In order to obtain details on bets that have settled the following function can 
 
 # *Quickstart Tutorial*
 This should help you get up and running in a very short time, assuming that you have met the pre-requisites.
-Let's set a target in this tutorial to place a bet on the first football game we find that contains the name 'man'. We will proceed to place a back bet of 5 EUR (or whatever the currency of your account) on the home team to win the game outright.
+Let's set a target in this tutorial to place a bet on the first football game we find that contains the name 'man'. We will proceed to place a back bet of 5 EUR (or whatever the currency of your account) on the home team to win the game outright at odds of 1.10. 
 
 To start, you need to login with your [Matchbook.com](http://www.matchbook.com) account credentials.
 ``` 
@@ -102,7 +102,7 @@ best_available_current_price <- min(prices_data_back$'decimal-odds') # min becau
 ```
 Now that we have found the price levels that we can back at (the volume is also available via 'prices_data_back$'available-amount'') we can place a bet on the runner we have selected. 
 ```
-mb_bet_place(session_data=session_details,runner_id=test_runner_id,side='back',stake=2,odds=1.1)
+mb_bet_place(session_data=session_details,runner_id=test_runner_id,side='back',stake=5,odds=1.10)
 mb_get_bets(session_data=session_details)
 ```
 When the bet is placed, its important to examine the status of the bet. If the status is 'matched' then you have been matched at the price provided. If it is 'open' then the bet has not been fully matched. For further details on placed bets check out the documentation: ?mb_bet_place
