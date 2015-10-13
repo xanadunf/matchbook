@@ -1,6 +1,6 @@
 # R package for the Matchbook.com API service #
 
-This R package provides some simple functions to enable interaction with the [Matchbook.com](http://www.matchbook.com) RESTful API service. Please read the documentation carefully for each individual function before use.  A registered [Matchbook.com](http://www.matchbook.com) account is required to use this package.
+This R package provides some simple functions to enable interaction with the [Matchbook.com](http://www.matchbook.com) RESTful API service. Please read the documentation carefully for each individual function before use.  A registered [Matchbook.com](http://www.matchbook.com) account is required to use this package. Please read the documentation before use.
 
 * * *
 # *Pre-requisites & Installation* 
@@ -102,7 +102,10 @@ Now that we have found the price levels that we can back at (the volume is also 
 mb_bet_place(session_data=session_details,runner_id=test_runner_id,side='back',stake=2,odds=1.1)
 mb_get_bets(session_data=session_details)
 ```
-When the bet is placed, its important to examine the status of the bet. If the status is 'matched' then you have been matched at the price provided. If it is 'unmatched' then the bet has not been fully matched. For further details on placed bets its a good idea to call mb_get_bets(session_data=my_session,runner_id=test_runner_id)
+When the bet is placed, its important to examine the status of the bet. If the status is 'matched' then you have been matched at the price provided. If it is 'open' then the bet has not been fully matched. For further details on placed bets check out the documentation: ?mb_bet_place
+```
+mb_get_bets(session_data=my_session,runner_id=test_runner_id)
+```
 
 * * *
 # *Status*
