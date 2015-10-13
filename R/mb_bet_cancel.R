@@ -1,6 +1,6 @@
 #' Perform a Bet Cancel Action
 #' @name mb_bet_cancel
-#' @description This function provides bet cancellation functionality. It is possible to cancel a single bet by entering in a single value for the bet_id parameter. It is also possible to cancel multiple bets at once by passing a vector of the bet_id parameter. It is also possible to cancel all bets from a given market, event or runner by entering the corresponding ids. NOTE: bets with status 'matched' can not be cancelled. 
+#' @description This function provides bet cancellation functionality. It is possible to cancel a single bet by entering in a single value for the bet_id parameter. It is also possible to cancel multiple bets at once by passing a vector of the bet_id parameter. It is also possible to cancel all bets from a given market, event or runner by entering the corresponding ids. NOTE: bets with status 'matched' or 'revised' can not be cancelled. 
 #' @param session_data A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.
 #' @param bet_id The bet_id or vector of bet_ids that you want to cancel. 
 #' @param event_id The event_id or vector of event_ids that you want to cancel. 
@@ -31,6 +31,7 @@
 #'   \item{created-at}{The date the bet was placed}   
 #'   \item{status}{The bet status. Status 'open' indicates an unmatched bet, 'matched' indicates a fully matched bet, 'cancelled' indicates a cancelled bet. For bets with status='open', the 'stake' and 'remaining' fields are key to determining the exact status. If the 'remaining' value is less than 'stake' but greater than zero, then the bet has been partially matched for a 'stake'-'remaining' amount. If the bet is fully un-matched, then the 'stake' and 'remaining' values will be equal.}   
 #' }
+#' If no bets have been cancelled the 'offers' object will be an empty list.
 #' @seealso \code{\link{mb_get_bets},\link{mb_bet_place},\link{mb_bet_update}}
 #' @export 
 #' @examples
@@ -71,8 +72,11 @@ mb_bet_cancel <- function(session_data,bet_id=NULL,event_id=NULL,market_id=NULL,
   {
     content <- jsonlite::fromJSON(content(cancel_bet_resp, "text", "application/json"))
     content$status_code <- status_code
-  } else
-  {
+  } else if(status_code==401){
+    print(paste("Please login as your session may have expired ...",sep=""))
+    content <- jsonlite::fromJSON(content(cancel_bet_resp, "text", "application/json"))
+    content$status_code <- status_code
+  } else{
     print(paste("Warning/Error in communicating with cancel bet at https://www.matchbook.com/bpapi/rest/offers",sep=""))
     content <- jsonlite::fromJSON(content(cancel_bet_resp, "text", "application/json"))
     content$status_code <- status_code
