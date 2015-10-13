@@ -71,8 +71,8 @@ From the results, we can see that football has sport id=15. We can use this to g
 
 ```
 event_data <- mb_get_events(session_data=session_details,sport_ids=football_sport_id)
-event_data[grep("man", event_data$name),]
-test_event_id <- event_data$id[grep("man", event_data$name)[1]]
+event_data[grep(tolower("man"), tolower(event_data$name)),]
+test_event_id <- event_data$id[grep(tolower("man"), tolower(event_data$name))[1]]
 test_event_id
 
 ```
