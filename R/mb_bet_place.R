@@ -36,8 +36,7 @@
 #' 
 
 mb_bet_place <- function(session_data,runner_id,side,stake,odds)
-{ #mb_bet_place(session_data=session_details,runner_id=2265802,side='back',stake=2,odds=5)
-  ##session_data <- mb_login("xan_niallf","xan_n1allf");side=c('back');stake=c(2);runner_id=c(2292375); odds <- c(5)
+{ 
   valid_sides        <- c("back","lay")
   content            <- list(status_code=0)
   if(is.null(session_data)|!is.list(session_data)){
@@ -71,7 +70,7 @@ mb_bet_place <- function(session_data,runner_id,side,stake,odds)
     content <- jsonlite::fromJSON(content(place_bet_resp, "text", "application/json"))
   } else if(status_code==401){
     print(paste("Please login as your session may have expired ...",sep=""))
-    content <- jsonlite::fromJSON(content(cancel_bet_resp, "text", "application/json"))
+    content <- jsonlite::fromJSON(content(place_bet_resp, "text", "application/json"))
     content$status_code <- status_code
   } else
   {

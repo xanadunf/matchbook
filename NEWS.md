@@ -1,3 +1,12 @@
+# *matchbook 1.0.4*
+
+## Release Notes
+
+No major changes.
+
+## Minor improvements and bug fixes
+
+* minor bug fixes and additions to documentation.
 # *matchbook 1.0.3*
 
 ## Release Notes

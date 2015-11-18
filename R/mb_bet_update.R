@@ -74,7 +74,7 @@ mb_bet_update <- function(session_data,bet_id,side,stake,odds)
     content$status_code <- status_code
   } else if(status_code==401){
     print(paste("Please login as your session may have expired ...",sep=""))
-    content <- jsonlite::fromJSON(content(cancel_bet_resp, "text", "application/json"))
+    content <- jsonlite::fromJSON(content(update_bet_resp, "text", "application/json"))
     content$status_code <- status_code
   } else
   {
