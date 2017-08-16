@@ -20,7 +20,7 @@ mb_login <- function(username,password,print_balance_details=TRUE)
   {
     session_token <-"";user_id<- 0;lnaguage="";odds_type<-"";currency<-"";user_name<-"";balance <- "not_available";exposure <- "not_available";
     body_data     <- paste("{'username': '",username,"', 'password': '",password,"'}",sep="")
-    login_resp    <- httr::POST("https://www.matchbook.com/bpapi/rest/security/session", body=body_data,httr::content_type_json(),httr::accept_json(),httr::add_headers('User-Agent'='rlibnf'))
+    login_resp    <- httr::POST("https://www.matchbook.com/edge/rest/security/session", body=body_data,httr::content_type_json(),httr::accept_json(),httr::add_headers('User-Agent'='rlibnf'))
     status_code   <- login_resp$status_code
     if(status_code==200)
     {

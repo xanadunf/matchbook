@@ -63,7 +63,7 @@ mb_bet_place <- function(session_data,runner_id,side,stake,odds)
   bet_list <- data.frame('runner-id'=runner_id,side=side,stake=stake,odds=odds,check.names=FALSE)
   
   body_data          <- paste("{'exchange-type':'back-lay','currency' : '",session_data$currency,"','odds-type':'",session_data$odds_type,"', 'offers': ",jsonlite::toJSON(bet_list,data.frame="rows"),"}",sep="")
-  place_bet_resp     <- httr::POST(paste("https://www.matchbook.com/bpapi/rest/offers",sep=""),body=body_data,httr::set_cookies('session-token'=session_data$session_token),httr::content_type_json(),httr::accept_json(),httr::add_headers('User-Agent'='rlibnf'))  
+  place_bet_resp     <- httr::POST(paste("https://www.matchbook.com/edge/rest/offers",sep=""),body=body_data,httr::set_cookies('session-token'=session_data$session_token),httr::content_type_json(),httr::accept_json(),httr::add_headers('User-Agent'='rlibnf'))  
   status_code        <- place_bet_resp$status_code  
   if(status_code==200)
   {
@@ -74,7 +74,7 @@ mb_bet_place <- function(session_data,runner_id,side,stake,odds)
     content$status_code <- status_code
   } else
   {
-    print(paste("Warning/Error in communicating with placing bet at https://www.matchbook.com/bpapi/rest/offers",sep=""))
+    print(paste("Warning/Error in communicating with placing bet at https://www.matchbook.com/edge/rest/offers",sep=""))
     content<- jsonlite::fromJSON(content(place_bet_resp, "text", "application/json"))
   }
   return(content)

@@ -66,7 +66,7 @@ mb_get_runners <- function(session_data,event_id,market_id,runner_id=NULL,runner
   if(!is.null(runner_id)){
     runner_url_comp    <- paste("/",runner_id,sep="")
   }
-  get_runners_resp   <- httr::GET(paste("https://www.matchbook.com/bpapi/rest/events/",event_id,"/markets/",market_id,"/runners",runner_url_comp,sep=""),query=param_list,httr::set_cookies('session-token'=session_data$session_token),httr::add_headers('User-Agent'='rlibnf'))
+  get_runners_resp   <- httr::GET(paste("https://www.matchbook.com/edge/rest/events/",event_id,"/markets/",market_id,"/runners",runner_url_comp,sep=""),query=param_list,httr::set_cookies('session-token'=session_data$session_token),httr::add_headers('User-Agent'='rlibnf'))
   status_code        <- get_runners_resp$status_code  
   if(status_code==200)
   {
@@ -78,7 +78,7 @@ mb_get_runners <- function(session_data,event_id,market_id,runner_id=NULL,runner
     }
   } else
   {
-    print(paste("Warning/Error in communicating with https://www.matchbook.com/bpapi/rest/events/",event_id,"/markets",sep=""))
+    print(paste("Warning/Error in communicating with https://www.matchbook.com/edge/rest/events/",event_id,"/markets",sep=""))
     content$status_code <- status_code
   }
   return(content)
