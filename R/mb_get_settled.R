@@ -21,7 +21,7 @@
 #' @export 
 #' @examples
 #' \dontrun{my_session <- mb_login("my_user_name","verysafepassword"); 
-#' mb_get_settled(session_data=my_session,event_id=309912)}
+#' mb_get_settled(session_data=my_session)}
 #' 
 
 mb_get_settled <- function(session_data,sport_id=NULL,period=NULL,start_date=Sys.Date()-90,end_date=Sys.Date())
@@ -53,18 +53,18 @@ mb_get_settled <- function(session_data,sport_id=NULL,period=NULL,start_date=Sys
     param_list <- c(param_list,'sport-ids'=paste(sport_id,collapse=","))
   }
   
-  get_markets_resp    <- httr::GET(paste("https://www.matchbook.com/bpapi/rest/reports/settlements",sep=""),query=param_list,httr::set_cookies('session-token'=session_data$session_token),httr::add_headers('User-Agent'='rlibnf'))
+  get_markets_resp    <- httr::GET(paste("https://www.matchbook.com/edge/rest/reports/v1/bets/settled",sep=""),query=param_list,httr::set_cookies('session-token'=session_data$session_token),httr::add_headers('User-Agent'='rlibnf'))
   status_code        <- get_markets_resp$status_code  
   if(status_code==200)
   {
-    content <- jsonlite::fromJSON(content(get_markets_resp, "text", "application/json"))$markets
+    content <- jsonlite::fromJSON(content(get_markets_resp, "text", "application/json"))$events
   } else if(status_code==401){
     print(paste("Please login as your session may have expired ...",sep=""))
     content <- jsonlite::fromJSON(content(get_markets_resp, "text", "application/json"))
     content$status_code <- status_code
   } else
   {
-    print(paste("Warning/Error in communicating with https://www.matchbook.com/bpapi/rest/reports/settlements",sep=""))
+    print(paste("Warning/Error in communicating with https://www.matchbook.com/edge/rest/reports/v1/bets/settled",sep=""))
     content$status_code <- status_code
   }
   return(content)

@@ -64,14 +64,14 @@ mb_get_markets <- function(session_data,event_id,market_states = c("open","suspe
     param_list <- c(param_list,'include-prices'='true')
   }
 
-  get_markets_resp    <- httr::GET(paste("https://www.matchbook.com/bpapi/rest/events/",event_id,"/markets",sep=""),query=param_list,httr::set_cookies('session-token'=session_data$session_token),httr::add_headers('User-Agent'='rlibnf'))
+  get_markets_resp    <- httr::GET(paste("https://www.matchbook.com/edge/rest/events/",event_id,"/markets",sep=""),query=param_list,httr::set_cookies('session-token'=session_data$session_token),httr::add_headers('User-Agent'='rlibnf'))
   status_code        <- get_markets_resp$status_code  
   if(status_code==200)
   {
     content <- jsonlite::fromJSON(content(get_markets_resp, "text", "application/json"))$markets
   } else
   {
-    print(paste("Warning/Error in communicating with https://www.matchbook.com/bpapi/rest/events/",event_id,"/markets",sep=""))
+    print(paste("Warning/Error in communicating with https://www.matchbook.com/edge/rest/events/",event_id,"/markets",sep=""))
     content$status_code <- status_code
   }
   return(content)
