@@ -6,7 +6,7 @@
 #' @param market_id The market_id integer for which a list of associated runners is required.
 #' @param runner_id If you only require details for a single runner, specify this optional runner_id integer. 
 #' @param runner_states A vector of string containing the runner states to return. Defaults to 'open' or 'suspended' market types.
-#' @param include_prices A boolean parameter indicating if the runner prices should be returned or not. Defaults to FALSE.
+#' @param include_withdrawn A boolean for returning or not the withdrawn runners in the response. Defaults to TRUE.
 #' @param side A filter to view the selected 'back' or 'lay' prices. The default is to return both.
 #' @return If successful, a dataframe with associated runner information. 
 #' The data frame has the following fields:
@@ -25,11 +25,11 @@
 #' mb_get_runners(session_data=my_session,event_id=123456,market_id=1234567)}
 #' 
 
-mb_get_runners <- function(session_data,event_id,market_id,runner_id=NULL,runner_states = c("open","suspended"),include_prices=FALSE,side=c("back","lay"))
+mb_get_runners <- function(session_data,event_id,market_id,runner_id=NULL,runner_states = c("open","suspended"),include_prices=FALSE,side=NULL,include_withdrawn=TRUE)
 {
   valid_market_states<- c("suspended","open")
   valid_runner_states<- c("suspended","open")
-  valid_sides        <- c("back","lay")
+  valid_sides        <- c("back","lay","win","lose")
   
   content            <- list(status_code=0)
   if(is.null(session_data)|!is.list(session_data)){
@@ -47,8 +47,11 @@ mb_get_runners <- function(session_data,event_id,market_id,runner_id=NULL,runner
   if(length(market_id)>1){
     print(paste("The market_id must be a single integer. Please amend and try again."));return(content)
   }
-  if(sum(!is.element(side,valid_sides))>0){
-    print(paste("All sides values must be one of",paste(valid_sides,collapse=","),". Please amend and try again."));return(content)
+  if(sum(!is.null(side))>0)
+  {
+    if(sum(!is.element(side,valid_sides))>0){
+      print(paste("All sides values must be one of",paste(valid_sides,collapse=","),". Please amend and try again."));return(content)
+    }
   }
   if(sum(!is.element(runner_states,valid_market_states))>0){
     print(paste("All runner_states values must be one of",paste(valid_runner_states,collapse=","),". Please amend and try again."));return(content)
@@ -59,8 +62,8 @@ mb_get_runners <- function(session_data,event_id,market_id,runner_id=NULL,runner
   }
   
   param_list         <- list('exchange-type'='back-lay','odds-type'=session_data$odds_type,currency=session_data$currency,'states'=paste(runner_states,collapse=","),side=paste(side,collapse=","))
-  if(include_prices==TRUE){
-    param_list <- c(param_list,'include-prices'='true')
+  if(include_withdrawn==TRUE){
+    param_list <- c(param_list,'include-withdrawn'='true')
   }
   runner_url_comp    <- ""
   if(!is.null(runner_id)){
