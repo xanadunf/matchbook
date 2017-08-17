@@ -26,7 +26,6 @@ mb_login <- function(username,password,print_balance_details=TRUE)
     {
       login_resp_content <- jsonlite::fromJSON(content(login_resp, "text", "application/json"))
       session_token      <- login_resp_content$`session-token`
-      user_id            <- login_resp_content$`user-id`
       language           <- login_resp_content$`account`$`language`
       odds_type          <- login_resp_content$`account`$`odds-type`
       currency           <- login_resp_content$`account`$`currency`
