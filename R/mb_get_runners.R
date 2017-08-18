@@ -7,6 +7,7 @@
 #' @param runner_id If you only require details for a single runner, specify this optional runner_id integer. 
 #' @param runner_states A vector of string containing the runner states to return. Defaults to 'open' or 'suspended' market types.
 #' @param include_withdrawn A boolean for returning or not the withdrawn runners in the response. Defaults to TRUE.
+#' @param include_prices A boolean for returning runner prices in the response. Defaults to TRUE.
 #' @param side A filter to view the selected 'back' or 'lay' prices. The default is to return both.
 #' @return If successful, a dataframe with associated runner information. 
 #' The data frame has the following fields:
@@ -25,7 +26,7 @@
 #' mb_get_runners(session_data=my_session,event_id=123456,market_id=1234567)}
 #' 
 
-mb_get_runners <- function(session_data,event_id,market_id,runner_id=NULL,runner_states = c("open","suspended"),include_prices=FALSE,side=NULL,include_withdrawn=TRUE)
+mb_get_runners <- function(session_data,event_id,market_id,runner_id=NULL,runner_states = c("open","suspended"),include_prices=TRUE,side=NULL,include_withdrawn=TRUE)
 {
   valid_market_states<- c("suspended","open")
   valid_runner_states<- c("suspended","open")
@@ -64,6 +65,9 @@ mb_get_runners <- function(session_data,event_id,market_id,runner_id=NULL,runner
   param_list         <- list('exchange-type'='back-lay','odds-type'=session_data$odds_type,currency=session_data$currency,'states'=paste(runner_states,collapse=","),side=paste(side,collapse=","))
   if(include_withdrawn==TRUE){
     param_list <- c(param_list,'include-withdrawn'='true')
+  }
+  if(include_prices==TRUE){
+    param_list <- c(param_list,'include-prices'='true')
   }
   runner_url_comp    <- ""
   if(!is.null(runner_id)){
