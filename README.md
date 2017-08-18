@@ -84,14 +84,14 @@ So lets get all of the market data for this event. Since we want to bet on the m
 ```
 market_data <- mb_get_markets(session_data=session_details,event_id=test_event_id,include_runners=TRUE)
 market_data
-test_market_id <- market_data$id[market_data$'grading-type'=="single-winner-wins"]
+test_market_id <- market_data$id[market_data$'market-type'=="one_x_two"]
 test_market_id
 ```
 Now that we have the correct market, lets get information for all runners in this market. This time, we include the parameter 'include_prices=TRUE' so that we can see what price each runner is available at. Also, lets select the runner from the resulting data.
 ```
 runner_data <- mb_get_runners(session_data=session_details,event_id=test_event_id,market_id=test_market_id,include_prices=TRUE)
 runner_data
-test_runner_id <- runner_data$id[grep("man", runner_data$name)]
+test_runner_id <- runner_data$id[grep("man", runner_data$name,ignore.case=TRUE)]
 test_runner_id
 ```
 Now we have details on all of the runners, lets get details on the prices for the runner that we have selected.
