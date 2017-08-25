@@ -10,7 +10,7 @@ mb_get_balance(session_data)
 \item{session_data}{A session object returned from a successful mb_login attempt. It contains details about your user preferences and security details.}
 }
 \value{
-If successful, a dataframe with acocunt balance information. 
+If successful, a list with account balance information. 
 The data frame has the following fields:
  \describe{
   \item{id}{the account id}
