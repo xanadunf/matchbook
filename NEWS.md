@@ -1,3 +1,9 @@
+# *matchbook 1.0.6*
+
+## Release Notes
+
+Addition of mb_get_currencies function. In-build unit test added.
+
 # *matchbook 1.0.5*
 
 ## Release Notes
